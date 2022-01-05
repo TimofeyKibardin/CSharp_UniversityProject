@@ -19,10 +19,10 @@ namespace KibardinTN_Project
             /*
              * Устанавливаем начальную точку
              */
-            XStart = pb.Width / 2;
+            XStart = pb.Width / 3;
             YStart = pb.Height / 2;
             TrajectoryGraphic = pb.CreateGraphics();
-            TrajectoryPen = new Pen(Color.Blue, 3f);
+            TrajectoryPen = new Pen(TrajectoryColor, 3f);
             Step = (AngleLimit - AngleStart) / TrajectoryPoints.Length;
             AngleNextValue = AngleStart;
             /*

@@ -72,7 +72,7 @@ namespace KibardinTN_Project
         {
             MoveCentralPoint(pb, trajec);
             CreateFigure(figureCoordinatesArray);
-            pb.CreateGraphics().DrawPolygon(new Pen(Color.Black, 3f), figureCoordinatesArray);
+            pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
         }
 
         /*
@@ -85,7 +85,7 @@ namespace KibardinTN_Project
                 FigureSize += BreathSize + 1;
                 MoveCentralPoint(pb, trajec);
                 CreateFigure(figureCoordinatesArray);
-                pb.CreateGraphics().DrawPolygon(new Pen(Color.Black, 3f), figureCoordinatesArray);
+                pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
                 breathIncrement += 1 + BreathSpeed;
 
                 if (breathIncrement >= 20)
@@ -98,7 +98,7 @@ namespace KibardinTN_Project
                 FigureSize -= BreathSize + 1;
                 MoveCentralPoint(pb, trajec);
                 CreateFigure(figureCoordinatesArray);
-                pb.CreateGraphics().DrawPolygon(new Pen(Color.Black, 3f), figureCoordinatesArray);
+                pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
                 breathIncrement -= 1 + BreathSpeed;
 
                 if (breathIncrement <= 0)

@@ -64,9 +64,10 @@ namespace KibardinTN_Project
             // 
             // pictureBox
             // 
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(728, 753);
+            this.pictureBox.Size = new System.Drawing.Size(1182, 753);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.BackColorChanged += new System.EventHandler(this.PictureBox_BackColorChanged);
@@ -75,13 +76,14 @@ namespace KibardinTN_Project
             // 
             // trackBarTrajectorySize
             // 
+            this.trackBarTrajectorySize.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.trackBarTrajectorySize.Location = new System.Drawing.Point(191, 9);
             this.trackBarTrajectorySize.Maximum = 11;
             this.trackBarTrajectorySize.Minimum = 1;
             this.trackBarTrajectorySize.Name = "trackBarTrajectorySize";
             this.trackBarTrajectorySize.Size = new System.Drawing.Size(206, 56);
             this.trackBarTrajectorySize.TabIndex = 1;
-            this.trackBarTrajectorySize.Value = 6;
+            this.trackBarTrajectorySize.Value = 11;
             this.trackBarTrajectorySize.ValueChanged += new System.EventHandler(this.TrackBar_TrajectorySize);
             // 
             // label1
@@ -116,6 +118,7 @@ namespace KibardinTN_Project
             this.controlPanel.Controls.Add(this.trackBarFigureSize);
             this.controlPanel.Controls.Add(this.label1);
             this.controlPanel.Controls.Add(this.trackBarTrajectorySize);
+            this.controlPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.controlPanel.Location = new System.Drawing.Point(734, 0);
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(448, 753);
@@ -123,36 +126,40 @@ namespace KibardinTN_Project
             // 
             // buttonChooseFigureColor
             // 
+            this.buttonChooseFigureColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonChooseFigureColor.Location = new System.Drawing.Point(317, 393);
             this.buttonChooseFigureColor.Name = "buttonChooseFigureColor";
             this.buttonChooseFigureColor.Size = new System.Drawing.Size(102, 100);
             this.buttonChooseFigureColor.TabIndex = 19;
             this.buttonChooseFigureColor.Text = "Выбрать цвет фигуры";
             this.buttonChooseFigureColor.UseVisualStyleBackColor = true;
-            this.buttonChooseFigureColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Click_ChooseFigureColor);
+            this.buttonChooseFigureColor.Click += new System.EventHandler(this.Click_ChooseFigureColor);
             // 
             // buttonChooseTrajectoryColor
             // 
+            this.buttonChooseTrajectoryColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonChooseTrajectoryColor.Location = new System.Drawing.Point(172, 393);
             this.buttonChooseTrajectoryColor.Name = "buttonChooseTrajectoryColor";
             this.buttonChooseTrajectoryColor.Size = new System.Drawing.Size(102, 100);
             this.buttonChooseTrajectoryColor.TabIndex = 18;
             this.buttonChooseTrajectoryColor.Text = "Выбрать цвет траектории";
             this.buttonChooseTrajectoryColor.UseVisualStyleBackColor = true;
-            this.buttonChooseTrajectoryColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Click_ChooseTrajectoryColor);
+            this.buttonChooseTrajectoryColor.Click += new System.EventHandler(this.Click_ChooseTrajectoryColor);
             // 
             // buttonChooseBackgroundColor
             // 
+            this.buttonChooseBackgroundColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonChooseBackgroundColor.Location = new System.Drawing.Point(27, 393);
             this.buttonChooseBackgroundColor.Name = "buttonChooseBackgroundColor";
             this.buttonChooseBackgroundColor.Size = new System.Drawing.Size(102, 100);
             this.buttonChooseBackgroundColor.TabIndex = 4;
             this.buttonChooseBackgroundColor.Text = "Выбрать цвет фона";
             this.buttonChooseBackgroundColor.UseVisualStyleBackColor = true;
-            this.buttonChooseBackgroundColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Click_ChooseBackgroundColor);
+            this.buttonChooseBackgroundColor.Click += new System.EventHandler(this.Click_ChooseBackgroundColor);
             // 
             // trackBarBreathSpeed
             // 
+            this.trackBarBreathSpeed.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.trackBarBreathSpeed.Location = new System.Drawing.Point(191, 337);
             this.trackBarBreathSpeed.Maximum = 5;
             this.trackBarBreathSpeed.Minimum = 1;
@@ -164,6 +171,7 @@ namespace KibardinTN_Project
             // 
             // trackBarBreathSize
             // 
+            this.trackBarBreathSize.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.trackBarBreathSize.Location = new System.Drawing.Point(191, 293);
             this.trackBarBreathSize.Maximum = 5;
             this.trackBarBreathSize.Minimum = 1;
@@ -196,6 +204,7 @@ namespace KibardinTN_Project
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.LightCoral;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Location = new System.Drawing.Point(302, 246);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(84, 29);
@@ -207,6 +216,7 @@ namespace KibardinTN_Project
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.GreenYellow;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Location = new System.Drawing.Point(200, 246);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(84, 29);
@@ -228,6 +238,7 @@ namespace KibardinTN_Project
             // buttonStart
             // 
             this.buttonStart.BackColor = System.Drawing.Color.GreenYellow;
+            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStart.Location = new System.Drawing.Point(200, 68);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(84, 29);
@@ -239,6 +250,7 @@ namespace KibardinTN_Project
             // buttonStop
             // 
             this.buttonStop.BackColor = System.Drawing.Color.LightCoral;
+            this.buttonStop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStop.Location = new System.Drawing.Point(302, 68);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(84, 29);
@@ -269,6 +281,7 @@ namespace KibardinTN_Project
             // 
             // trackBarFigureSpeed
             // 
+            this.trackBarFigureSpeed.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.trackBarFigureSpeed.Location = new System.Drawing.Point(191, 151);
             this.trackBarFigureSpeed.Maximum = 5;
             this.trackBarFigureSpeed.Minimum = 1;
@@ -290,6 +303,7 @@ namespace KibardinTN_Project
             // 
             // trackBarFigureSize
             // 
+            this.trackBarFigureSize.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.trackBarFigureSize.Location = new System.Drawing.Point(191, 109);
             this.trackBarFigureSize.Minimum = 1;
             this.trackBarFigureSize.Name = "trackBarFigureSize";

@@ -30,8 +30,8 @@ namespace KibardinTN_Project
         //Отрисовка на PictureBox
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
-            pictureBox.Height = (int)(ClientSize.Height * 0.7);
-            pictureBox.Width = (int)(ClientSize.Width * 0.5);
+            pictureBox.Height = (int)(ClientSize.Height);
+            pictureBox.Width = (int)(ClientSize.Width);
             trajectory.Draw(pictureBox);
         }
 
@@ -112,17 +112,14 @@ namespace KibardinTN_Project
             Refresh();
         }
 
-        //Кнопка, отвечающая за смену цвета фона
-        private void Click_ChooseBackgroundColor(object sender, MouseEventArgs e)
+        //Отрисовка траектории в PictureBox после смены цвета
+        private void PictureBox_BackColorChanged(object sender, EventArgs e)
         {
-            chooseColor.ShowDialog();
-            pictureBox.BackColor = chooseColor.Color;
-            Refresh();
             trajectory.Draw(pictureBox);
         }
 
         //Кнопка, отвечающая за смену цвета траектории
-        private void Click_ChooseTrajectoryColor(object sender, MouseEventArgs e)
+        private void Click_ChooseTrajectoryColor(object sender, EventArgs e)
         {
             chooseColor.ShowDialog();
             trajectory.TrajectoryColor = chooseColor.Color;
@@ -131,17 +128,18 @@ namespace KibardinTN_Project
         }
 
         //Кнопка, отвечающая за смену цвета фигуры
-        private void Click_ChooseFigureColor(object sender, MouseEventArgs e)
+        private void Click_ChooseFigureColor(object sender, EventArgs e)
         {
             chooseColor.ShowDialog();
             moveableObject.FigureColor = chooseColor.Color;
-            Refresh();
-            trajectory.Draw(pictureBox);
         }
 
-        //Отрисовка траектории в PictureBox после смены цвета
-        private void PictureBox_BackColorChanged(object sender, EventArgs e)
+        //Кнопка, отвечающая за смену цвета фона
+        private void Click_ChooseBackgroundColor(object sender, EventArgs e)
         {
+            chooseColor.ShowDialog();
+            pictureBox.BackColor = chooseColor.Color;
+            Refresh();
             trajectory.Draw(pictureBox);
         }
     }
