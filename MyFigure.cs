@@ -10,7 +10,7 @@ namespace KibardinTN_Project
 			figureCoordinatesArray = new Point[20];
         }
 
-		private Point rhombusCenter;
+        private Point rhombusCenter; //Центр ромба
 
         /*
          * Метод, отвечающий за создание фигуры
@@ -109,8 +109,8 @@ namespace KibardinTN_Project
         }
 
         public override void Draw(PictureBox pb)
-        {
-            throw new NotImplementedException();
-        }
+    {
+        throw new NotImplementedException();
     }
+}
 }

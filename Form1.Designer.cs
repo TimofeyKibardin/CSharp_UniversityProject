@@ -34,6 +34,9 @@ namespace KibardinTN_Project
             this.trackBarTrajectorySize = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.buttonEnterText = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.buttonChooseFigureColor = new System.Windows.Forms.Button();
             this.buttonChooseTrajectoryColor = new System.Windows.Forms.Button();
             this.buttonChooseBackgroundColor = new System.Windows.Forms.Button();
@@ -41,11 +44,11 @@ namespace KibardinTN_Project
             this.trackBarBreathSize = new System.Windows.Forms.TrackBar();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonStopBreath = new System.Windows.Forms.Button();
+            this.buttonStartBreath = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.buttonStart = new System.Windows.Forms.Button();
-            this.buttonStop = new System.Windows.Forms.Button();
+            this.buttonStartMove = new System.Windows.Forms.Button();
+            this.buttonStopMove = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.trackBarFigureSpeed = new System.Windows.Forms.TrackBar();
@@ -66,8 +69,9 @@ namespace KibardinTN_Project
             // 
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(1182, 753);
+            this.pictureBox.Size = new System.Drawing.Size(1034, 565);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.BackColorChanged += new System.EventHandler(this.PictureBox_BackColorChanged);
@@ -77,11 +81,12 @@ namespace KibardinTN_Project
             // trackBarTrajectorySize
             // 
             this.trackBarTrajectorySize.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.trackBarTrajectorySize.Location = new System.Drawing.Point(191, 9);
+            this.trackBarTrajectorySize.Location = new System.Drawing.Point(167, 7);
+            this.trackBarTrajectorySize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBarTrajectorySize.Maximum = 11;
             this.trackBarTrajectorySize.Minimum = 1;
             this.trackBarTrajectorySize.Name = "trackBarTrajectorySize";
-            this.trackBarTrajectorySize.Size = new System.Drawing.Size(206, 56);
+            this.trackBarTrajectorySize.Size = new System.Drawing.Size(180, 45);
             this.trackBarTrajectorySize.TabIndex = 1;
             this.trackBarTrajectorySize.Value = 11;
             this.trackBarTrajectorySize.ValueChanged += new System.EventHandler(this.TrackBar_TrajectorySize);
@@ -90,15 +95,18 @@ namespace KibardinTN_Project
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(10, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 23);
+            this.label1.Size = new System.Drawing.Size(146, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "Размер траектории";
             // 
             // controlPanel
             // 
             this.controlPanel.BackColor = System.Drawing.Color.Honeydew;
+            this.controlPanel.Controls.Add(this.buttonEnterText);
+            this.controlPanel.Controls.Add(this.label8);
+            this.controlPanel.Controls.Add(this.textBox);
             this.controlPanel.Controls.Add(this.buttonChooseFigureColor);
             this.controlPanel.Controls.Add(this.buttonChooseTrajectoryColor);
             this.controlPanel.Controls.Add(this.buttonChooseBackgroundColor);
@@ -106,11 +114,11 @@ namespace KibardinTN_Project
             this.controlPanel.Controls.Add(this.trackBarBreathSize);
             this.controlPanel.Controls.Add(this.label7);
             this.controlPanel.Controls.Add(this.label6);
-            this.controlPanel.Controls.Add(this.button2);
-            this.controlPanel.Controls.Add(this.button1);
+            this.controlPanel.Controls.Add(this.buttonStopBreath);
+            this.controlPanel.Controls.Add(this.buttonStartBreath);
             this.controlPanel.Controls.Add(this.label5);
-            this.controlPanel.Controls.Add(this.buttonStart);
-            this.controlPanel.Controls.Add(this.buttonStop);
+            this.controlPanel.Controls.Add(this.buttonStartMove);
+            this.controlPanel.Controls.Add(this.buttonStopMove);
             this.controlPanel.Controls.Add(this.label4);
             this.controlPanel.Controls.Add(this.label3);
             this.controlPanel.Controls.Add(this.trackBarFigureSpeed);
@@ -119,17 +127,49 @@ namespace KibardinTN_Project
             this.controlPanel.Controls.Add(this.label1);
             this.controlPanel.Controls.Add(this.trackBarTrajectorySize);
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.controlPanel.Location = new System.Drawing.Point(734, 0);
+            this.controlPanel.Location = new System.Drawing.Point(642, 0);
+            this.controlPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(448, 753);
+            this.controlPanel.Size = new System.Drawing.Size(392, 565);
             this.controlPanel.TabIndex = 3;
+            // 
+            // buttonEnterText
+            // 
+            this.buttonEnterText.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonEnterText.Location = new System.Drawing.Point(291, 302);
+            this.buttonEnterText.Name = "buttonEnterText";
+            this.buttonEnterText.Size = new System.Drawing.Size(75, 23);
+            this.buttonEnterText.TabIndex = 21;
+            this.buttonEnterText.Text = "Enter";
+            this.buttonEnterText.UseVisualStyleBackColor = true;
+            this.buttonEnterText.Click += new System.EventHandler(this.Click_EnterFigureName);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(41, 302);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(114, 19);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Выбор фигуры";
+            // 
+            // textBox
+            // 
+            this.textBox.Location = new System.Drawing.Point(175, 302);
+            this.textBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(110, 23);
+            this.textBox.TabIndex = 4;
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPressed);
             // 
             // buttonChooseFigureColor
             // 
             this.buttonChooseFigureColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonChooseFigureColor.Location = new System.Drawing.Point(317, 393);
+            this.buttonChooseFigureColor.Location = new System.Drawing.Point(291, 479);
+            this.buttonChooseFigureColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonChooseFigureColor.Name = "buttonChooseFigureColor";
-            this.buttonChooseFigureColor.Size = new System.Drawing.Size(102, 100);
+            this.buttonChooseFigureColor.Size = new System.Drawing.Size(89, 75);
             this.buttonChooseFigureColor.TabIndex = 19;
             this.buttonChooseFigureColor.Text = "Выбрать цвет фигуры";
             this.buttonChooseFigureColor.UseVisualStyleBackColor = true;
@@ -138,9 +178,10 @@ namespace KibardinTN_Project
             // buttonChooseTrajectoryColor
             // 
             this.buttonChooseTrajectoryColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonChooseTrajectoryColor.Location = new System.Drawing.Point(172, 393);
+            this.buttonChooseTrajectoryColor.Location = new System.Drawing.Point(151, 479);
+            this.buttonChooseTrajectoryColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonChooseTrajectoryColor.Name = "buttonChooseTrajectoryColor";
-            this.buttonChooseTrajectoryColor.Size = new System.Drawing.Size(102, 100);
+            this.buttonChooseTrajectoryColor.Size = new System.Drawing.Size(89, 75);
             this.buttonChooseTrajectoryColor.TabIndex = 18;
             this.buttonChooseTrajectoryColor.Text = "Выбрать цвет траектории";
             this.buttonChooseTrajectoryColor.UseVisualStyleBackColor = true;
@@ -149,9 +190,10 @@ namespace KibardinTN_Project
             // buttonChooseBackgroundColor
             // 
             this.buttonChooseBackgroundColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonChooseBackgroundColor.Location = new System.Drawing.Point(27, 393);
+            this.buttonChooseBackgroundColor.Location = new System.Drawing.Point(15, 479);
+            this.buttonChooseBackgroundColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonChooseBackgroundColor.Name = "buttonChooseBackgroundColor";
-            this.buttonChooseBackgroundColor.Size = new System.Drawing.Size(102, 100);
+            this.buttonChooseBackgroundColor.Size = new System.Drawing.Size(89, 75);
             this.buttonChooseBackgroundColor.TabIndex = 4;
             this.buttonChooseBackgroundColor.Text = "Выбрать цвет фона";
             this.buttonChooseBackgroundColor.UseVisualStyleBackColor = true;
@@ -160,11 +202,12 @@ namespace KibardinTN_Project
             // trackBarBreathSpeed
             // 
             this.trackBarBreathSpeed.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.trackBarBreathSpeed.Location = new System.Drawing.Point(191, 337);
+            this.trackBarBreathSpeed.Location = new System.Drawing.Point(167, 253);
+            this.trackBarBreathSpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBarBreathSpeed.Maximum = 5;
             this.trackBarBreathSpeed.Minimum = 1;
             this.trackBarBreathSpeed.Name = "trackBarBreathSpeed";
-            this.trackBarBreathSpeed.Size = new System.Drawing.Size(206, 56);
+            this.trackBarBreathSpeed.Size = new System.Drawing.Size(180, 45);
             this.trackBarBreathSpeed.TabIndex = 17;
             this.trackBarBreathSpeed.Value = 1;
             this.trackBarBreathSpeed.ValueChanged += new System.EventHandler(this.TrackBar_BreathSpeed);
@@ -172,11 +215,12 @@ namespace KibardinTN_Project
             // trackBarBreathSize
             // 
             this.trackBarBreathSize.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.trackBarBreathSize.Location = new System.Drawing.Point(191, 293);
+            this.trackBarBreathSize.Location = new System.Drawing.Point(167, 220);
+            this.trackBarBreathSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBarBreathSize.Maximum = 5;
             this.trackBarBreathSize.Minimum = 1;
             this.trackBarBreathSize.Name = "trackBarBreathSize";
-            this.trackBarBreathSize.Size = new System.Drawing.Size(206, 56);
+            this.trackBarBreathSize.Size = new System.Drawing.Size(180, 45);
             this.trackBarBreathSize.TabIndex = 16;
             this.trackBarBreathSize.Value = 1;
             this.trackBarBreathSize.Scroll += new System.EventHandler(this.TrackBar_BreathSize);
@@ -185,9 +229,9 @@ namespace KibardinTN_Project
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(32, 337);
+            this.label7.Location = new System.Drawing.Point(28, 253);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(153, 23);
+            this.label7.Size = new System.Drawing.Size(129, 19);
             this.label7.TabIndex = 15;
             this.label7.Text = "Частота дыхания";
             // 
@@ -195,77 +239,81 @@ namespace KibardinTN_Project
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(36, 293);
+            this.label6.Location = new System.Drawing.Point(29, 220);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(149, 23);
+            this.label6.Size = new System.Drawing.Size(127, 19);
             this.label6.TabIndex = 14;
             this.label6.Text = "Размер дыхания";
             // 
-            // button2
+            // buttonStopBreath
             // 
-            this.button2.BackColor = System.Drawing.Color.LightCoral;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(302, 246);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 29);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Stop";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Click_StopBreath);
+            this.buttonStopBreath.BackColor = System.Drawing.Color.LightCoral;
+            this.buttonStopBreath.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonStopBreath.Location = new System.Drawing.Point(264, 184);
+            this.buttonStopBreath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonStopBreath.Name = "buttonStopBreath";
+            this.buttonStopBreath.Size = new System.Drawing.Size(74, 22);
+            this.buttonStopBreath.TabIndex = 13;
+            this.buttonStopBreath.Text = "Stop";
+            this.buttonStopBreath.UseVisualStyleBackColor = false;
+            this.buttonStopBreath.Click += new System.EventHandler(this.Click_StopBreath);
             // 
-            // button1
+            // buttonStartBreath
             // 
-            this.button1.BackColor = System.Drawing.Color.GreenYellow;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(200, 246);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 29);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Click_StartBreath);
+            this.buttonStartBreath.BackColor = System.Drawing.Color.GreenYellow;
+            this.buttonStartBreath.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonStartBreath.Location = new System.Drawing.Point(175, 184);
+            this.buttonStartBreath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonStartBreath.Name = "buttonStartBreath";
+            this.buttonStartBreath.Size = new System.Drawing.Size(74, 22);
+            this.buttonStartBreath.TabIndex = 12;
+            this.buttonStartBreath.Text = "Start";
+            this.buttonStartBreath.UseVisualStyleBackColor = false;
+            this.buttonStartBreath.Click += new System.EventHandler(this.Click_StartBreath);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(17, 250);
+            this.label5.Location = new System.Drawing.Point(20, 188);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(168, 21);
+            this.label5.Size = new System.Drawing.Size(136, 17);
             this.label5.TabIndex = 11;
             this.label5.Text = "Активация дыхания";
             // 
-            // buttonStart
+            // buttonStartMove
             // 
-            this.buttonStart.BackColor = System.Drawing.Color.GreenYellow;
-            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonStart.Location = new System.Drawing.Point(200, 68);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(84, 29);
-            this.buttonStart.TabIndex = 4;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = false;
-            this.buttonStart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Click_StartMove);
+            this.buttonStartMove.BackColor = System.Drawing.Color.GreenYellow;
+            this.buttonStartMove.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonStartMove.Location = new System.Drawing.Point(175, 51);
+            this.buttonStartMove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonStartMove.Name = "buttonStartMove";
+            this.buttonStartMove.Size = new System.Drawing.Size(74, 22);
+            this.buttonStartMove.TabIndex = 4;
+            this.buttonStartMove.Text = "Start";
+            this.buttonStartMove.UseVisualStyleBackColor = false;
+            this.buttonStartMove.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Click_StartMove);
             // 
-            // buttonStop
+            // buttonStopMove
             // 
-            this.buttonStop.BackColor = System.Drawing.Color.LightCoral;
-            this.buttonStop.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonStop.Location = new System.Drawing.Point(302, 68);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(84, 29);
-            this.buttonStop.TabIndex = 5;
-            this.buttonStop.Text = "Stop";
-            this.buttonStop.UseVisualStyleBackColor = false;
-            this.buttonStop.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Click_StopMove);
+            this.buttonStopMove.BackColor = System.Drawing.Color.LightCoral;
+            this.buttonStopMove.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonStopMove.Location = new System.Drawing.Point(264, 51);
+            this.buttonStopMove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonStopMove.Name = "buttonStopMove";
+            this.buttonStopMove.Size = new System.Drawing.Size(74, 22);
+            this.buttonStopMove.TabIndex = 5;
+            this.buttonStopMove.Text = "Stop";
+            this.buttonStopMove.UseVisualStyleBackColor = false;
+            this.buttonStopMove.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Click_StopMove);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(6, 72);
+            this.label4.Location = new System.Drawing.Point(10, 55);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(179, 21);
+            this.label4.Size = new System.Drawing.Size(145, 17);
             this.label4.TabIndex = 10;
             this.label4.Text = "Активация движения";
             // 
@@ -273,20 +321,21 @@ namespace KibardinTN_Project
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(27, 151);
+            this.label3.Location = new System.Drawing.Point(24, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 23);
+            this.label3.Size = new System.Drawing.Size(132, 19);
             this.label3.TabIndex = 9;
             this.label3.Text = "Скорость фигуры";
             // 
             // trackBarFigureSpeed
             // 
             this.trackBarFigureSpeed.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.trackBarFigureSpeed.Location = new System.Drawing.Point(191, 151);
+            this.trackBarFigureSpeed.Location = new System.Drawing.Point(167, 113);
+            this.trackBarFigureSpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBarFigureSpeed.Maximum = 5;
             this.trackBarFigureSpeed.Minimum = 1;
             this.trackBarFigureSpeed.Name = "trackBarFigureSpeed";
-            this.trackBarFigureSpeed.Size = new System.Drawing.Size(206, 56);
+            this.trackBarFigureSpeed.Size = new System.Drawing.Size(180, 45);
             this.trackBarFigureSpeed.TabIndex = 6;
             this.trackBarFigureSpeed.Value = 1;
             this.trackBarFigureSpeed.ValueChanged += new System.EventHandler(this.TrackBar_FigureSpeed);
@@ -295,19 +344,20 @@ namespace KibardinTN_Project
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(45, 109);
+            this.label2.Location = new System.Drawing.Point(37, 82);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 23);
+            this.label2.Size = new System.Drawing.Size(119, 19);
             this.label2.TabIndex = 5;
             this.label2.Text = "Размер фигуры";
             // 
             // trackBarFigureSize
             // 
             this.trackBarFigureSize.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.trackBarFigureSize.Location = new System.Drawing.Point(191, 109);
+            this.trackBarFigureSize.Location = new System.Drawing.Point(167, 82);
+            this.trackBarFigureSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBarFigureSize.Minimum = 1;
             this.trackBarFigureSize.Name = "trackBarFigureSize";
-            this.trackBarFigureSize.Size = new System.Drawing.Size(206, 56);
+            this.trackBarFigureSize.Size = new System.Drawing.Size(180, 45);
             this.trackBarFigureSize.TabIndex = 7;
             this.trackBarFigureSize.Value = 1;
             this.trackBarFigureSize.Scroll += new System.EventHandler(this.TrackBar_FigureSize);
@@ -319,12 +369,13 @@ namespace KibardinTN_Project
             // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1182, 753);
+            this.ClientSize = new System.Drawing.Size(1034, 565);
             this.Controls.Add(this.controlPanel);
             this.Controls.Add(this.pictureBox);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "mainForm";
             this.Text = "Form1";
             this.Resize += new System.EventHandler(this.MainForm_Resize);
@@ -351,20 +402,23 @@ namespace KibardinTN_Project
         private System.Windows.Forms.TrackBar trackBarFigureSize;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar trackBarFigureSpeed;
-        private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.Button buttonStartMove;
+        private System.Windows.Forms.Button buttonStopMove;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar trackBarBreathSpeed;
         private System.Windows.Forms.TrackBar trackBarBreathSize;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonStopBreath;
+        private System.Windows.Forms.Button buttonStartBreath;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonChooseFigureColor;
         private System.Windows.Forms.Button buttonChooseTrajectoryColor;
         private System.Windows.Forms.Button buttonChooseBackgroundColor;
         private System.Windows.Forms.ColorDialog chooseColor;
+        private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.Button buttonEnterText;
+        private System.Windows.Forms.Label label8;
     }
 }
 

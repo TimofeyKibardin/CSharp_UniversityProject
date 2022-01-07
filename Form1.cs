@@ -19,6 +19,7 @@ namespace KibardinTN_Project
 
         static Trajectory trajectory = new Ellipse(); //Создание объекта траектории
         MoveableObject moveableObject = new MyFigure(); //Создание объекта фигуры
+        String figureName;
 
         //Изменение размера главной формы
         private void MainForm_Resize(object sender, EventArgs e)
@@ -30,8 +31,8 @@ namespace KibardinTN_Project
         //Отрисовка на PictureBox
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
-            pictureBox.Height = (int)(ClientSize.Height);
-            pictureBox.Width = (int)(ClientSize.Width);
+            pictureBox.Height = ClientSize.Height;
+            pictureBox.Width = ClientSize.Width;
             trajectory.Draw(pictureBox);
         }
 
@@ -141,6 +142,27 @@ namespace KibardinTN_Project
             pictureBox.BackColor = chooseColor.Color;
             Refresh();
             trajectory.Draw(pictureBox);
+        }
+
+        //Ячейка для ввода текста
+        private void TextBox_KeyPressed(object sender, KeyPressEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(textBox.Text))
+            {
+                figureName = textBox.Text;
+            }
+        }
+
+        //Кнопка, отвечающая за конвертацию текста в string-переменную
+        private void Click_EnterFigureName(object sender, EventArgs e)
+        {
+            figureName = Convert.ToString(textBox.Text).ToUpper();
+
+            if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК"))
+            {
+                moveableObject = new UserFigure(figureName);
+                moveableObject.Move(pictureBox, trajectory);
+            }
         }
     }
 }
