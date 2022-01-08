@@ -156,9 +156,16 @@ namespace KibardinTN_Project
             // 
             // textBox
             // 
+            this.textBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "Квадрат",
+            "Треугольник",
+            "Фигура_Вариант8"});
+            this.textBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.textBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBox.Location = new System.Drawing.Point(175, 302);
             this.textBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox.Name = "textBox";
+            this.textBox.PlaceholderText = "Квадрат";
             this.textBox.Size = new System.Drawing.Size(110, 23);
             this.textBox.TabIndex = 4;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPressed);

@@ -15,6 +15,15 @@ namespace KibardinTN_Project
         public mainForm()
         {
             InitializeComponent();
+            AutoCompleteStringCollection source = new AutoCompleteStringCollection()
+            {
+                "Квадрат",
+                "Треугольник",
+                "Фигура_Вариант8"
+            };
+            textBox.AutoCompleteCustomSource = source;
+            textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
         static Trajectory trajectory = new Ellipse(); //Создание объекта траектории
@@ -153,6 +162,7 @@ namespace KibardinTN_Project
             }
         }
 
+
         //Кнопка, отвечающая за конвертацию текста в string-переменную
         private void Click_EnterFigureName(object sender, EventArgs e)
         {
@@ -161,6 +171,11 @@ namespace KibardinTN_Project
             if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК"))
             {
                 moveableObject = new UserFigure(figureName);
+                moveableObject.Move(pictureBox, trajectory);
+            }
+            if (figureName.Equals("ФИГУРА_ВАРИАНТ8"))
+            {
+                moveableObject = new MyFigure();
                 moveableObject.Move(pictureBox, trajectory);
             }
         }

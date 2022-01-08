@@ -88,7 +88,7 @@ namespace KibardinTN_Project
                 pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
                 breathIncrement += 1 + BreathSpeed;
 
-                if (breathIncrement >= 20)
+                if (breathIncrement >= 10)
                 {
                     breathStatus = false;
                 }
