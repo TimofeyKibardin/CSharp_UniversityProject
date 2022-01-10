@@ -63,6 +63,8 @@ namespace KibardinTN_Project
             this.trackBarFigureSize = new System.Windows.Forms.TrackBar();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.chooseColor = new System.Windows.Forms.ColorDialog();
+            this.buttonCopyText = new System.Windows.Forms.Button();
+            this.buttonPasteText = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTrajectorySize)).BeginInit();
             this.controlPanel.SuspendLayout();
@@ -109,6 +111,8 @@ namespace KibardinTN_Project
             // controlPanel
             // 
             this.controlPanel.BackColor = System.Drawing.Color.Honeydew;
+            this.controlPanel.Controls.Add(this.buttonPasteText);
+            this.controlPanel.Controls.Add(this.buttonCopyText);
             this.controlPanel.Controls.Add(this.label10);
             this.controlPanel.Controls.Add(this.buttonVariant8);
             this.controlPanel.Controls.Add(this.buttonTrajectoryCloud);
@@ -465,6 +469,26 @@ namespace KibardinTN_Project
             this.Timer.Interval = 80;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
+            // buttonCopyText
+            // 
+            this.buttonCopyText.Location = new System.Drawing.Point(200, 533);
+            this.buttonCopyText.Name = "buttonCopyText";
+            this.buttonCopyText.Size = new System.Drawing.Size(112, 29);
+            this.buttonCopyText.TabIndex = 4;
+            this.buttonCopyText.Text = "Copy";
+            this.buttonCopyText.UseVisualStyleBackColor = true;
+            this.buttonCopyText.Click += new System.EventHandler(this.Click_CopyText);
+            // 
+            // buttonPasteText
+            // 
+            this.buttonPasteText.Location = new System.Drawing.Point(324, 533);
+            this.buttonPasteText.Name = "buttonPasteText";
+            this.buttonPasteText.Size = new System.Drawing.Size(112, 29);
+            this.buttonPasteText.TabIndex = 29;
+            this.buttonPasteText.Text = "Paste";
+            this.buttonPasteText.UseVisualStyleBackColor = true;
+            this.buttonPasteText.Click += new System.EventHandler(this.Click_PasteText);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -523,6 +547,8 @@ namespace KibardinTN_Project
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button buttonVariant8;
         private System.Windows.Forms.Button buttonTrajectoryCloud;
+        private System.Windows.Forms.Button buttonPasteText;
+        private System.Windows.Forms.Button buttonCopyText;
     }
 }
 

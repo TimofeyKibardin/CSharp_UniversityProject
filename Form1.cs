@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -52,6 +52,9 @@ namespace KibardinTN_Project
         static Trajectory trajectory = new Ellipse(); //Создание объекта траектории
         MoveableObject moveableObject = new MyFigure(); //Создание объекта фигуры
         String figureName; //Имя фигуры, переменная для текстбокса
+        String wordFromTextBox1;
+        String wordFromTextBox2;
+        String wordFromTextBox3;
 
         //Изменение размера главной формы
         private void MainForm_Resize(object sender, EventArgs e)
@@ -195,11 +198,13 @@ namespace KibardinTN_Project
             {
                 moveableObject = new UserFigure(figureName);
                 moveableObject.Move(pictureBox, trajectory);
+                moveableObject.FigureColor = chooseColor.Color;
             }
             if (figureName.Equals("ФИГУРА_ВАРИАНТ8"))
             {
                 moveableObject = new MyFigure();
                 moveableObject.Move(pictureBox, trajectory);
+                moveableObject.FigureColor = chooseColor.Color;
             }
         }
 
@@ -249,6 +254,39 @@ namespace KibardinTN_Project
             trajectory = new Ellipse();
             trajectory.Draw(pictureBox);
             Refresh();
+        }
+
+        private void Click_CopyText(object sender, EventArgs e)
+        {
+            string desiredFormat = DataFormats.UnicodeText;
+
+            Clipboard.SetDataObject(textBox.Text);
+            IDataObject iData1 = Clipboard.GetDataObject();
+            if (iData1.GetDataPresent(DataFormats.Text))
+            {
+                wordFromTextBox1 = iData1.GetData(desiredFormat) as string;
+            }
+
+            Clipboard.SetDataObject(textBox2.Text);
+            IDataObject iData2 = Clipboard.GetDataObject();
+            if (iData2.GetDataPresent(DataFormats.Text))
+            {
+                wordFromTextBox2 = iData2.GetData(desiredFormat) as string;
+            }
+
+            Clipboard.SetDataObject(textBox3.Text);
+            IDataObject iData3 = Clipboard.GetDataObject();
+            if (iData3.GetDataPresent(DataFormats.Text))
+            {
+                wordFromTextBox3 = iData3.GetData(desiredFormat) as string;
+            }
+        }
+
+        private void Click_PasteText(object sender, EventArgs e)
+        {
+            textBox.Text = wordFromTextBox1;
+            textBox2.Text = wordFromTextBox2;
+            textBox3.Text = wordFromTextBox3;
         }
     }
 }
