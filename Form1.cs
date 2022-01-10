@@ -15,20 +15,43 @@ namespace KibardinTN_Project
         public mainForm()
         {
             InitializeComponent();
-            AutoCompleteStringCollection source = new AutoCompleteStringCollection()
+            AutoCompleteTextBox1();
+        }
+
+        private void AutoCompleteTextBox1()
+        {
+            AutoCompleteStringCollection source1 = new AutoCompleteStringCollection()
             {
                 "Квадрат",
                 "Треугольник",
                 "Фигура_Вариант8"
             };
-            textBox.AutoCompleteCustomSource = source;
+            textBox.AutoCompleteCustomSource = source1;
             textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            AutoCompleteStringCollection source2 = new AutoCompleteStringCollection()
+            {
+                "0",
+                "Pi/4",
+                "Pi/2",
+                "3Pi/4",
+                "Pi",
+                "5Pi/4",
+                "3Pi/2",
+                "7Pi/4",
+            };
+            textBox2.AutoCompleteCustomSource = source2;
+            textBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            textBox2.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            textBox3.AutoCompleteCustomSource = source2;
+            textBox3.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            textBox3.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
         static Trajectory trajectory = new Ellipse(); //Создание объекта траектории
         MoveableObject moveableObject = new MyFigure(); //Создание объекта фигуры
-        String figureName;
+        String figureName; //Имя фигуры, переменная для текстбокса
 
         //Изменение размера главной формы
         private void MainForm_Resize(object sender, EventArgs e)
@@ -163,7 +186,7 @@ namespace KibardinTN_Project
         }
 
 
-        //Кнопка, отвечающая за конвертацию текста в string-переменную
+        //Кнопка, отвечающая за конвертацию figure в string-переменную
         private void Click_EnterFigureName(object sender, EventArgs e)
         {
             figureName = Convert.ToString(textBox.Text).ToUpper();
@@ -178,6 +201,54 @@ namespace KibardinTN_Project
                 moveableObject = new MyFigure();
                 moveableObject.Move(pictureBox, trajectory);
             }
+        }
+
+        //Кнопка, отвечающая за конвертацию trajectory в string-переменную
+        private void Click_EnterTrajectoryName(object sender, EventArgs e)
+        {
+            double fi1 = 1;
+            double fi2 = 1;
+
+            if (textBox2.Text.Equals("0")) fi1 = 0;
+            else if (textBox2.Text.Equals("Pi/4")) fi1 = Math.PI / 4;
+            else if (textBox2.Text.Equals("Pi/2")) fi1 = Math.PI / 2;
+            else if (textBox2.Text.Equals("3Pi/4")) fi1 = 3 * Math.PI / 4;
+            else if (textBox2.Text.Equals("Pi")) fi1 = Math.PI;
+            else if (textBox2.Text.Equals("5Pi/4")) fi1 = 5 * Math.PI / 4;
+            else if (textBox2.Text.Equals("3Pi/2")) fi1 = 3 * Math.PI / 2;
+            else if (textBox2.Text.Equals("7Pi/4")) fi1 = 7 * Math.PI / 4;
+
+            if (textBox3.Text.Equals("0")) fi2 = 0;
+            else if (textBox3.Text.Equals("Pi/4")) fi2 = Math.PI / 4;
+            else if (textBox3.Text.Equals("Pi/2")) fi2 = Math.PI / 2;
+            else if (textBox3.Text.Equals("3Pi/4")) fi2 = 3 * Math.PI / 4;
+            else if (textBox3.Text.Equals("Pi")) fi2 = Math.PI;
+            else if (textBox3.Text.Equals("5Pi/4")) fi2 = 5 * Math.PI / 4;
+            else if (textBox3.Text.Equals("3Pi/2")) fi2 = 3 * Math.PI / 2;
+            else if (textBox3.Text.Equals("7Pi/4")) fi2 = 7 * Math.PI / 4;
+
+            trajectory = new UserTrajectory
+            {
+                AngleStart = fi1,
+                AngleLimit = fi2
+            };
+
+            trajectory.Draw(pictureBox);
+            Refresh();
+        }
+
+        private void Click_DrawCloud(object sender, EventArgs e)
+        {
+            trajectory = new Epicycloid();
+            trajectory.Draw(pictureBox);
+            Refresh();
+        }
+
+        private void Click_DrawTrajectoryVariant8(object sender, EventArgs e)
+        {
+            trajectory = new Ellipse();
+            trajectory.Draw(pictureBox);
+            Refresh();
         }
     }
 }

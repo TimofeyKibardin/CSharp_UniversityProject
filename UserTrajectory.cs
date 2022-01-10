@@ -4,13 +4,11 @@ using System.Windows.Forms;
 
 namespace KibardinTN_Project
 {
-	class Ellipse : Trajectory
+	class UserTrajectory : Trajectory
 	{
-		public Ellipse()
+		public UserTrajectory()
 		{
-            AngleStart = 3 * Math.PI / 2;
-            AngleLimit = 5 * Math.PI / 2;
-        }
+		}
 
         public override void Draw(PictureBox pb)
         {

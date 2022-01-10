@@ -11,13 +11,16 @@ namespace KibardinTN_Project
 		public double XStart { get; set; } //Стартовый X
 		public double YStart { get; set; } //Старотовый Y
 
+		protected double a = 200;
+		protected double b = 140;
+
 		private double angleStart = 0; //Начальный угол
 		public double AngleStart
         {
 			get { return angleStart; }
 			set { angleStart = value; }
         }
-		private double angleLimit = Math.PI;
+		private double angleLimit = Math.PI; //Конечный угол
 		public double AngleLimit
         {
 			get { return angleLimit; }
@@ -32,7 +35,7 @@ namespace KibardinTN_Project
 			get { return scale; }
 			set { scale = value; }
         }
-		private Point[] trajectoryPoints = new Point[100]; //Массив на 100 точек
+		private Point[] trajectoryPoints = new Point[200]; //Массив на 200 точек
 		public Point[] TrajectoryPoints
         {
 			get { return trajectoryPoints; }
