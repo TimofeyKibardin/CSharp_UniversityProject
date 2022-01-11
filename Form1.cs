@@ -52,9 +52,9 @@ namespace KibardinTN_Project
         static Trajectory trajectory = new Ellipse(); //Создание объекта траектории
         MoveableObject moveableObject = new MyFigure(); //Создание объекта фигуры
         String figureName; //Имя фигуры, переменная для текстбокса
-        String wordFromTextBox1;
-        String wordFromTextBox2;
-        String wordFromTextBox3;
+        StringBuilder wordForCopy = new StringBuilder(); //Строка для скопированного текста
+        bool[] wordForCopyStatus = new bool[3] { false, false, false }; //Массив со статусом по наличию текста в текстовых ячейках
+        bool copyStatus = false; //Статус, скопировано или нет
 
         //Изменение размера главной формы
         private void MainForm_Resize(object sender, EventArgs e)
@@ -237,7 +237,7 @@ namespace KibardinTN_Project
                 AngleStart = fi1,
                 AngleLimit = fi2
             };
-
+            trajectory.TrajectoryColor = chooseColor.Color;
             trajectory.Draw(pictureBox);
             Refresh();
         }
@@ -245,6 +245,7 @@ namespace KibardinTN_Project
         private void Click_DrawCloud(object sender, EventArgs e)
         {
             trajectory = new Epicycloid();
+            trajectory.TrajectoryColor = chooseColor.Color;
             trajectory.Draw(pictureBox);
             Refresh();
         }
@@ -252,41 +253,66 @@ namespace KibardinTN_Project
         private void Click_DrawTrajectoryVariant8(object sender, EventArgs e)
         {
             trajectory = new Ellipse();
+            trajectory.TrajectoryColor = chooseColor.Color;
             trajectory.Draw(pictureBox);
             Refresh();
         }
 
+        //Кнопка, отвечающая за копирование текста из текстовых ячеек
         private void Click_CopyText(object sender, EventArgs e)
         {
-            string desiredFormat = DataFormats.UnicodeText;
-
-            Clipboard.SetDataObject(textBox.Text);
-            IDataObject iData1 = Clipboard.GetDataObject();
-            if (iData1.GetDataPresent(DataFormats.Text))
+            if (!copyStatus)
             {
-                wordFromTextBox1 = iData1.GetData(desiredFormat) as string;
-            }
 
-            Clipboard.SetDataObject(textBox2.Text);
-            IDataObject iData2 = Clipboard.GetDataObject();
-            if (iData2.GetDataPresent(DataFormats.Text))
-            {
-                wordFromTextBox2 = iData2.GetData(desiredFormat) as string;
-            }
+                if (!String.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    wordForCopy.Append(textBox.Text).Append(',');
+                    wordForCopyStatus[0] = true;
+                }
+                if (!String.IsNullOrWhiteSpace(textBox2.Text))
+                {
+                    wordForCopy.Append(textBox2.Text).Append(',');
+                    wordForCopyStatus[1] = true;
+                }
+                if (!String.IsNullOrWhiteSpace(textBox3.Text))
+                {
+                    wordForCopy.Append(textBox3.Text);
+                    wordForCopyStatus[2] = true;
+                }
 
-            Clipboard.SetDataObject(textBox3.Text);
-            IDataObject iData3 = Clipboard.GetDataObject();
-            if (iData3.GetDataPresent(DataFormats.Text))
-            {
-                wordFromTextBox3 = iData3.GetData(desiredFormat) as string;
+                Clipboard.SetText(wordForCopy.ToString());
+                copyStatus = true;
             }
         }
 
+        //Кнопка, отвечающая за подстановку текста в текстовые ячейки
         private void Click_PasteText(object sender, EventArgs e)
         {
-            textBox.Text = wordFromTextBox1;
-            textBox2.Text = wordFromTextBox2;
-            textBox3.Text = wordFromTextBox3;
+            if (copyStatus)
+            {
+
+                string[] pasteTextArray = new string[3];
+
+                if (wordForCopy.ToString().Equals(Clipboard.GetText()))
+                {
+                    pasteTextArray = Clipboard.GetText().Split(',');
+                    
+                    for (int i = 0; i < wordForCopyStatus.Length; i++)
+                    {
+                        if (!wordForCopyStatus[i])
+                        {
+                            pasteTextArray[i] = "";
+                        }
+                    }
+                }
+
+                textBox.Text = pasteTextArray[0];
+                textBox2.Text = pasteTextArray[1];
+                textBox3.Text = pasteTextArray[2];
+
+                wordForCopy.Clear();
+                copyStatus = false;
+            }
         }
     }
 }
