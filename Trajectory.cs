@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-	abstract class Trajectory
+	[Serializable]
+	public abstract class Trajectory
 	{
 		public double X { get; set; } //Координата X
 		public double Y { get; set; } //Координата Y
@@ -39,10 +41,10 @@ namespace KibardinTN_Project
 		public Point[] TrajectoryPoints
         {
 			get { return trajectoryPoints; }
-			private set {}
+			set {}
         }
-		public Graphics TrajectoryGraphic { get; set; } //Графика
-		public Pen TrajectoryPen { get; set; } //Ручка
+		[XmlIgnore] public Graphics TrajectoryGraphic { get; set; } //Графика
+		[XmlIgnore] public Pen TrajectoryPen { get; set; } //Ручка
 
 		private Color trajectoryColor = Color.Blue; //Базовый цвет траектории
 		public Color TrajectoryColor

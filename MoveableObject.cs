@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-	abstract class MoveableObject : Trajectory
+	[Serializable]
+	public abstract class MoveableObject : Trajectory
 	{
 		private int centerMovingSpeed = 1; //Базовая скорость движения
 		public int CenterMovingSpeed

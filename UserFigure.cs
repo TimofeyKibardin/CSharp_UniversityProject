@@ -4,7 +4,8 @@ using System.Windows.Forms;
 
 namespace KibardinTN_Project
 {
-	class UserFigure : Figure
+    [Serializable]
+    public class UserFigure : Figure
 	{
 		public UserFigure(String figureName)
 		{

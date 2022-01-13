@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-	abstract class Figure : MoveableObject
+	[Serializable]
+	public abstract class Figure : MoveableObject
 	{
 		protected Point[] figureCoordinatesArray;
 		public int FigureSize { get; set; }

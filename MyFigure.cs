@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+
 namespace KibardinTN_Project
 {
-	class MyFigure : Figure
+    [Serializable]
+    public class MyFigure : Figure
 	{
 		public MyFigure()
 		{

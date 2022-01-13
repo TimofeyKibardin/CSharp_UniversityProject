@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-	class Epicycloid : Trajectory
+    [Serializable]
+    public class Epicycloid : Trajectory
 	{
 		public Epicycloid()
 		{
             AngleStart = Math.PI;
             AngleLimit = 2 * Math.PI;
-		}
+        }
 
         private double radius = 20;
         public double Radius
