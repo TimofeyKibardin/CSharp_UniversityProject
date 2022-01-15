@@ -17,9 +17,9 @@ namespace KibardinTN_Project
         public mainForm()
         {
             InitializeComponent();
-            AutoCompleteTextBox1();
+            comboBoxFigure.Items.AddRange(new string[] { "Квадрат", "Треугольник", "Фигура_Вариант8" });
 
-            textBox.Text = Properties.Settings.Default.textBoxText;
+            comboBoxFigure.Text = Properties.Settings.Default.textBoxText;
             textBox2.Text = Properties.Settings.Default.textBoxText2;
             textBox3.Text = Properties.Settings.Default.textBoxText3;
             textBox4.Text = Properties.Settings.Default.textBoxText4;
@@ -27,17 +27,23 @@ namespace KibardinTN_Project
             trajectory.TrajectoryColor = Properties.Settings.Default.trajectoryColor;
             figure.FigureColor = Properties.Settings.Default.figureColor;
             pictureBox.BackColor = Properties.Settings.Default.backgroundColor;
+            trackBarFigureSize.Value = Properties.Settings.Default.figureSize;
+            trackBarFigureSpeed.Value = Properties.Settings.Default.figureCenterMovingSpeed;
             trackBarBreathSize.Value = Properties.Settings.Default.breathSize;
             trackBarBreathSpeed.Value = Properties.Settings.Default.breathSpeed;
             trackBarTrajectorySize.Value = Properties.Settings.Default.trajectorySize;
             Timer.Enabled = Properties.Settings.Default.timerIsOn;
             figure.IsBreathOn = Properties.Settings.Default.breathIsOn;
-            wordForCopyStatus = Properties.Settings.Default.wordStatusForCopyArray.Split(',');
         }
+
+        Trajectory trajectory = new Ellipse(); //Создание объекта траектории
+        MoveableObject figure = new MyFigure(); //Создание объекта фигуры
+        String figureName; //Имя фигуры, переменная для текстбокса
+        StringBuilder wordForCopy = new StringBuilder(); //Строка для скопированного текста
 
         private void Click_SaveSettings(object sender, EventArgs e)
         {
-            Properties.Settings.Default.textBoxText = textBox.Text; //Первый текст бокс
+            Properties.Settings.Default.textBoxText = comboBoxFigure.Text; //Первый текст бокс
             Properties.Settings.Default.textBoxText2 = textBox2.Text; //Второй текст бокс
             Properties.Settings.Default.textBoxText3 = textBox3.Text; //Третий текст бокс
             Properties.Settings.Default.textBoxText4 = textBox4.Text; //Четвёртый текст бокс
@@ -50,52 +56,8 @@ namespace KibardinTN_Project
             Properties.Settings.Default.trajectorySize = trackBarTrajectorySize.Value; //Значение размера траектории
             Properties.Settings.Default.timerIsOn = Timer.Enabled; //Включено ли движение фигуры
             Properties.Settings.Default.breathIsOn = figure.IsBreathOn; //Включено ли дыхание фигуры
-            Properties.Settings.Default.wordStatusForCopyArray = String.Join(',', wordForCopyStatus);
-            Properties.Settings.Default.Save();
-
-            /*savedTrajectory = new XmlSerializer(trajectory.GetType());
-            savedFigure = new XmlSerializer(figure.GetType());
-
-            using (FileStream fs = new FileStream("savedData.xml", FileMode.OpenOrCreate))
-            {
-                savedTrajectory.Serialize(fs, trajectory);
-                savedFigure.Serialize(fs, figure);
-            }*/
+            Properties.Settings.Default.Save(); //Сохранение
         }
-
-        private void Click_Deserialize(object sender, EventArgs e)
-        {
-            /*savedTrajectory = new XmlSerializer(trajectory.GetType());
-            savedFigure = new XmlSerializer(figure.GetType());
-
-            using (FileStream fs = new FileStream("savedData.xml", FileMode.OpenOrCreate))
-            {
-                trajectory = (Trajectory)savedTrajectory.Deserialize(fs);
-                figure = (Figure)savedFigure.Deserialize(fs);
-            }*/
-        }
-
-        private void AutoCompleteTextBox1()
-        {
-            AutoCompleteStringCollection source1 = new AutoCompleteStringCollection()
-            {
-                "Квадрат",
-                "Треугольник",
-                "Фигура_Вариант8"
-            };
-            textBox.AutoCompleteCustomSource = source1;
-            textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        }
-
-        Trajectory trajectory = new Ellipse(); //Создание объекта траектории
-        Figure figure = new MyFigure(); //Создание объекта фигуры
-        String figureName; //Имя фигуры, переменная для текстбокса
-        StringBuilder wordForCopy = new StringBuilder(); //Строка для скопированного текста
-        String[] wordForCopyStatus = new String[5] { "False", "False", "False", "False", "False" }; //Массив со статусом по наличию текста в текстовых ячейках
-        public XmlSerializer savedTrajectory;
-        public XmlSerializer savedFigure;
-
 
         //Изменение размера главной формы
         private void MainForm_Resize(object sender, EventArgs e)
@@ -195,7 +157,6 @@ namespace KibardinTN_Project
         {
             chooseColor.ShowDialog();
             trajectory.TrajectoryColor = chooseColor.Color;
-            Refresh();
             trajectory.Draw(pictureBox);
         }
 
@@ -211,14 +172,13 @@ namespace KibardinTN_Project
         {
             chooseColor.ShowDialog();
             pictureBox.BackColor = chooseColor.Color;
-            Refresh();
             trajectory.Draw(pictureBox);
         }
 
         //Кнопка, отвечающая за конвертацию figure в string-переменную
         private void Click_EnterFigureName(object sender, EventArgs e)
         {
-            figureName = Convert.ToString(textBox.Text).ToUpper();
+            figureName = Convert.ToString(comboBoxFigure.Text).ToUpper();
 
             if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК"))
             {
@@ -248,6 +208,7 @@ namespace KibardinTN_Project
                     AngleStart = fi1,
                     AngleLimit = fi2
                 };
+
                 trajectory.TrajectoryColor = chooseColor.Color;
                 trajectory.Draw(pictureBox);
                 Refresh();
@@ -277,72 +238,51 @@ namespace KibardinTN_Project
         {
             Clipboard.Clear();
 
-            if (!String.IsNullOrWhiteSpace(textBox.Text))
+            if (!String.IsNullOrWhiteSpace(comboBoxFigure.Text))
             {
-                wordForCopy.Append(textBox.Text).Append(',');
-                wordForCopyStatus[0] = "True";
+                wordForCopy.Append(comboBoxFigure.Text).Append(',');
             }
             if (!String.IsNullOrWhiteSpace(textBox2.Text))
             {
                 wordForCopy.Append(textBox2.Text).Append(',');
-                wordForCopyStatus[1] = "True";
             }
             if (!String.IsNullOrWhiteSpace(textBox3.Text))
             {
                 wordForCopy.Append(textBox3.Text).Append(',');
-                wordForCopyStatus[2] = "True";
             }
             if (!String.IsNullOrWhiteSpace(textBox4.Text))
             {
                 wordForCopy.Append(textBox4.Text).Append(',');
-                wordForCopyStatus[3] = "True";
             }
             if (!String.IsNullOrWhiteSpace(textBox5.Text))
             {
                 wordForCopy.Append(textBox5.Text);
-                wordForCopyStatus[4] = "True";
             }
 
             Clipboard.SetDataObject(wordForCopy.ToString());
+            wordForCopy.Clear();
         }
 
         //Кнопка, отвечающая за подстановку текста в текстовые ячейки
         private void Click_PasteText(object sender, EventArgs e)
         {
             String[] pasteTextArray = new String[5];
-
-            /*if (wordForCopy.ToString().Equals(Clipboard.GetText()))
-            {
-                    pasteTextArray = Clipboard.GetText().Split(',');
-                    
-                    for (int i = 0; i < 5; i++)
-                    {
-                        if (!wordForCopyStatus[i])
-                        {
-                            pasteTextArray[i] = "";
-                        }
-                    }
-            }*/
-
             IDataObject iData = Clipboard.GetDataObject();
             if (iData.GetDataPresent(typeof(String)))
             {
                 pasteTextArray = Clipboard.GetText().Split(',');
-                for (int i = 0; i < wordForCopyStatus.Length; i++)
-                {
-                    bool status = bool.Parse(wordForCopyStatus[i]);
-                    if (!status)
-                    {
-                        pasteTextArray[i] = "";
-                    }
-                }
             }
 
-        textBox.Text = pasteTextArray[0];
+        comboBoxFigure.Text = pasteTextArray[0];
         textBox2.Text = pasteTextArray[1];
         textBox3.Text = pasteTextArray[2];
         textBox4.Text = pasteTextArray[3];
         textBox5.Text = pasteTextArray[4];
+        }
+
+        private void comboBox_SelectIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

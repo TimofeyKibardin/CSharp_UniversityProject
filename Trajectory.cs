@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-	[Serializable]
+	
 	public abstract class Trajectory
 	{
 		public double X { get; set; } //Координата X
@@ -43,8 +43,8 @@ namespace KibardinTN_Project
 			get { return trajectoryPoints; }
 			set {}
         }
-		[XmlIgnore] public Graphics TrajectoryGraphic { get; set; } //Графика
-		[XmlIgnore] public Pen TrajectoryPen { get; set; } //Ручка
+		public Graphics TrajectoryGraphic { get; set; } //Графика
+		public Pen TrajectoryPen { get; set; } //Ручка
 
 		private Color trajectoryColor = Color.Blue; //Базовый цвет траектории
 		public Color TrajectoryColor

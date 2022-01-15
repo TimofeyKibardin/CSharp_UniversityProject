@@ -5,9 +5,22 @@ using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-	[Serializable]
+	
 	public abstract class MoveableObject : Trajectory
 	{
+		protected Point[] figureCoordinatesArray; //Массив точек, из которых будет состоять фигура
+		private int figureSize = 1; //Базовое значение масштаба фигуры
+		public int FigureSize
+        {
+			get { return figureSize; }
+			set { figureSize = value; }
+        }
+		public bool IsBreathOn { get; set; } //Включено дыхание или нет
+		protected bool breathStatus = true; //
+		protected int breathIncrement = 1;
+		public int BreathSpeed { get; set; }
+		public int BreathSize { get; set; }
+
 		private int centerMovingSpeed = 1; //Базовая скорость движения
 		public int CenterMovingSpeed
         {

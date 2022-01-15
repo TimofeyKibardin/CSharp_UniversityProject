@@ -202,17 +202,5 @@ namespace KibardinTN_Project.Properties {
                 this["breathIsOn"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string wordStatusForCopyArray {
-            get {
-                return ((string)(this["wordStatusForCopyArray"]));
-            }
-            set {
-                this["wordStatusForCopyArray"] = value;
-            }
-        }
     }
 }

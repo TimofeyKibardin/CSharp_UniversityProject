@@ -5,16 +5,9 @@ using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-	[Serializable]
+	
 	public abstract class Figure : MoveableObject
 	{
-		protected Point[] figureCoordinatesArray;
-		public int FigureSize { get; set; }
-		public bool IsBreathOn { get; set; }
-		protected bool breathStatus = true;
-		protected int breathIncrement = 1;
-		public int BreathSpeed { get; set; }
-		public int BreathSize { get; set; }
 
         protected abstract Point[] CreateFigure(Point[] coordinatesArray);
 		public abstract void MoveWithoutBreath(PictureBox pb, Trajectory trajec);

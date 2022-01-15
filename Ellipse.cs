@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-    [Serializable]
+    
     public class Ellipse : Trajectory
 	{
 		public Ellipse()

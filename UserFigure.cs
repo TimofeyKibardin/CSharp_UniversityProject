@@ -4,9 +4,13 @@ using System.Windows.Forms;
 
 namespace KibardinTN_Project
 {
-    [Serializable]
+    
     public class UserFigure : Figure
 	{
+        public UserFigure()
+        {
+        }
+
 		public UserFigure(String figureName)
 		{
             this.figureName = figureName;
@@ -32,7 +36,6 @@ namespace KibardinTN_Project
                 triangleCenter = new Point((int)X, (int)Y);
                 figureCoordinatesArray[0] = new Point(triangleCenter.X, triangleCenter.Y + (FigureSize + 10));
                 figureCoordinatesArray[1] = new Point(triangleCenter.X + (FigureSize + 10), triangleCenter.Y - (FigureSize + 10));
-                figureCoordinatesArray[2] = new Point(triangleCenter.X - (FigureSize + 10), triangleCenter.Y - (FigureSize + 10));
                 figureCoordinatesArray[2] = new Point(triangleCenter.X - (FigureSize + 10), triangleCenter.Y - (FigureSize + 10));
             }
 
