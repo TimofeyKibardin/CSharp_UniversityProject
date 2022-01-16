@@ -40,6 +40,7 @@ namespace KibardinTN_Project
         MoveableObject figure = new MyFigure(); //Создание объекта фигуры
         String figureName; //Имя фигуры, переменная для текстбокса
         StringBuilder wordForCopy = new StringBuilder(); //Строка для скопированного текста
+        DateTime localTime = DateTime.Now; //Локальное время для обработчика ошибок
 
         private void Click_SaveSettings(object sender, EventArgs e)
         {
@@ -178,40 +179,73 @@ namespace KibardinTN_Project
         //Кнопка, отвечающая за конвертацию figure в string-переменную
         private void Click_EnterFigureName(object sender, EventArgs e)
         {
-            figureName = Convert.ToString(comboBoxFigure.Text).ToUpper();
+            try
+            {
+                figureName = Convert.ToString(comboBoxFigure.Text).ToUpper();
 
-            if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК"))
-            {
-                figure = new UserFigure(figureName);
-                figure.Move(pictureBox, trajectory);
-                figure.FigureColor = chooseColor.Color;
+                if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК"))
+                {
+                    figure = new UserFigure(figureName);
+                    figure.Move(pictureBox, trajectory);
+                    figure.FigureColor = chooseColor.Color;
+                    richTextBox1.Text = localTime + "\nУспешно!";
+                    richTextBox1.BackColor = Color.GreenYellow;
+                }
+                else if (figureName.Equals("ФИГУРА_ВАРИАНТ8"))
+                {
+                    figure = new MyFigure();
+                    figure.Move(pictureBox, trajectory);
+                    figure.FigureColor = chooseColor.Color;
+                    richTextBox1.Text = localTime + "\nУспешно!";
+                    richTextBox1.BackColor = Color.GreenYellow;
+                }
+                else
+                {
+                    throw new ArgumentException("");
+                }
             }
-            if (figureName.Equals("ФИГУРА_ВАРИАНТ8"))
+            catch (ArgumentException)
             {
-                figure = new MyFigure();
-                figure.Move(pictureBox, trajectory);
-                figure.FigureColor = chooseColor.Color;
+                richTextBox1.Text = localTime + "\nВыбранной фигуры нет в списке доступных.";
+                richTextBox1.BackColor = Color.LightCoral;
             }
         }
 
         //Кнопка, отвечающая за конвертацию trajectory в string-переменную
         private void Click_EnterTrajectoryName(object sender, EventArgs e)
         {
-            if ((!String.IsNullOrWhiteSpace(textBox2.Text)) && (!String.IsNullOrWhiteSpace(textBox3.Text))
-                && (!String.IsNullOrWhiteSpace(textBox4.Text)) && (!String.IsNullOrWhiteSpace(textBox5.Text)))
+            int i = 0;
+
+            try
             {
-                double fi1 = Double.Parse(textBox2.Text) * Math.PI / Double.Parse(textBox3.Text);
-                double fi2 = Double.Parse(textBox4.Text) * Math.PI / Double.Parse(textBox5.Text);
-
-                trajectory = new UserTrajectory
+                if ((!String.IsNullOrWhiteSpace(textBox2.Text)) && (!String.IsNullOrWhiteSpace(textBox3.Text))
+                    && (!String.IsNullOrWhiteSpace(textBox4.Text)) && (!String.IsNullOrWhiteSpace(textBox5.Text)))
                 {
-                    AngleStart = fi1,
-                    AngleLimit = fi2
-                };
+                    double fi1 = Double.Parse(textBox2.Text) * Math.PI / Double.Parse(textBox3.Text);
+                    double fi2 = Double.Parse(textBox4.Text) * Math.PI / Double.Parse(textBox5.Text);
 
-                trajectory.TrajectoryColor = chooseColor.Color;
-                trajectory.Draw(pictureBox);
-                Refresh();
+                    trajectory = new UserTrajectory
+                    {
+                        AngleStart = fi1,
+                        AngleLimit = fi2
+                    };
+
+                    trajectory.TrajectoryColor = chooseColor.Color;
+                    trajectory.Draw(pictureBox);
+                    Refresh();
+                    richTextBox1.Text = localTime + "\nУспешно!";
+                    richTextBox1.BackColor = Color.GreenYellow;
+                }
+                else if (!int.TryParse(textBox2.Text, out i) || !int.TryParse(textBox3.Text, out i)
+                    || !int.TryParse(textBox4.Text, out i) || !int.TryParse(textBox2.Text, out i))
+                {
+                    throw new ArgumentException("");
+                }
+            }
+            catch
+            {
+                richTextBox1.Text = localTime + "\nДолжны быть введены только числа.";
+                richTextBox1.BackColor = Color.LightCoral;
             }
         }
 
@@ -278,11 +312,6 @@ namespace KibardinTN_Project
         textBox3.Text = pasteTextArray[2];
         textBox4.Text = pasteTextArray[3];
         textBox5.Text = pasteTextArray[4];
-        }
-
-        private void comboBox_SelectIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

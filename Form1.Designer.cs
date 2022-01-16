@@ -34,6 +34,8 @@ namespace KibardinTN_Project
             this.trackBarTrajectorySize = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.comboBoxFigure = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -75,8 +77,6 @@ namespace KibardinTN_Project
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.chooseColor = new System.Windows.Forms.ColorDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTrajectorySize)).BeginInit();
             this.controlPanel.SuspendLayout();
@@ -174,6 +174,24 @@ namespace KibardinTN_Project
             this.controlPanel.Size = new System.Drawing.Size(392, 698);
             this.controlPanel.TabIndex = 3;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 9.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(4, 531);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(155, 17);
+            this.label17.TabIndex = 41;
+            this.label17.Text = "Сообщение об ошибке";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(175, 531);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(206, 84);
+            this.richTextBox1.TabIndex = 40;
+            this.richTextBox1.Text = "";
+            // 
             // comboBoxFigure
             // 
             this.comboBoxFigure.AutoCompleteCustomSource.AddRange(new string[] {
@@ -187,7 +205,6 @@ namespace KibardinTN_Project
             this.comboBoxFigure.Name = "comboBoxFigure";
             this.comboBoxFigure.Size = new System.Drawing.Size(137, 23);
             this.comboBoxFigure.TabIndex = 39;
-            this.comboBoxFigure.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectIndexChanged);
             // 
             // label16
             // 
@@ -602,24 +619,6 @@ namespace KibardinTN_Project
             // 
             this.Timer.Interval = 50;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(175, 531);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(206, 84);
-            this.richTextBox1.TabIndex = 40;
-            this.richTextBox1.Text = "";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Segoe UI", 9.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label17.Location = new System.Drawing.Point(4, 531);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(155, 17);
-            this.label17.TabIndex = 41;
-            this.label17.Text = "Сообщение об ошибке";
             // 
             // mainForm
             // 
