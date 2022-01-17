@@ -25,20 +25,19 @@ namespace KibardinTN_Project
             {
                 figureCoordinatesArray = new Point[4];
                 squareCenter = new Point((int)X, (int)Y);
-                figureCoordinatesArray[0] = new Point(squareCenter.X - (FigureSize + 10), squareCenter.Y + (FigureSize + 10));
-                figureCoordinatesArray[1] = new Point(squareCenter.X + (FigureSize + 10), squareCenter.Y + (FigureSize + 10));
-                figureCoordinatesArray[2] = new Point(squareCenter.X + (FigureSize + 10), squareCenter.Y - (FigureSize + 10));
-                figureCoordinatesArray[3] = new Point(squareCenter.X - (FigureSize + 10), squareCenter.Y - (FigureSize + 10));
+                figureCoordinatesArray[0] = new Point(squareCenter.X - (FigureSize + 20 + breathIncrement), squareCenter.Y + (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[1] = new Point(squareCenter.X + (FigureSize + 20 + breathIncrement), squareCenter.Y + (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[2] = new Point(squareCenter.X + (FigureSize + 20 + breathIncrement), squareCenter.Y - (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[3] = new Point(squareCenter.X - (FigureSize + 20 + breathIncrement), squareCenter.Y - (FigureSize + 20 + breathIncrement));
             }
             if (figureName.Equals("ТРЕУГОЛЬНИК"))
             {
                 figureCoordinatesArray = new Point[3];
                 triangleCenter = new Point((int)X, (int)Y);
-                figureCoordinatesArray[0] = new Point(triangleCenter.X, triangleCenter.Y + (FigureSize + 10));
-                figureCoordinatesArray[1] = new Point(triangleCenter.X + (FigureSize + 10), triangleCenter.Y - (FigureSize + 10));
-                figureCoordinatesArray[2] = new Point(triangleCenter.X - (FigureSize + 10), triangleCenter.Y - (FigureSize + 10));
+                figureCoordinatesArray[0] = new Point(triangleCenter.X, triangleCenter.Y + (FigureSize + breathIncrement + 10));
+                figureCoordinatesArray[1] = new Point(triangleCenter.X + (FigureSize + 10 + breathIncrement), triangleCenter.Y - (FigureSize + 10 + breathIncrement));
+                figureCoordinatesArray[2] = new Point(triangleCenter.X - (FigureSize + 10 + breathIncrement), triangleCenter.Y - (FigureSize + 10 + breathIncrement));
             }
-
 
             return figureCoordinatesArray;
         }
@@ -58,28 +57,30 @@ namespace KibardinTN_Project
         {
             if (breathStatus)
             {
-                FigureSize += BreathSize + 1;
-                MoveCentralPoint(pb, trajec);
-                CreateFigure(figureCoordinatesArray);
-                pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
-                breathIncrement += 1 + BreathSpeed;
-
-                if (breathIncrement >= 20)
+                if (breathIncrement >= BreathSize + 10)
                 {
                     breathStatus = false;
                 }
+                else
+                {
+                    MoveCentralPoint(pb, trajec);
+                    CreateFigure(figureCoordinatesArray);
+                    pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
+                    breathIncrement += BreathSpeed;
+                }
             }
-            else
+            else if (!breathStatus)
             {
-                FigureSize -= BreathSize + 1;
-                MoveCentralPoint(pb, trajec);
-                CreateFigure(figureCoordinatesArray);
-                pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
-                breathIncrement -= 1 + BreathSpeed;
-
                 if (breathIncrement <= 0)
                 {
                     breathStatus = true;
+                }
+                else
+                {
+                    MoveCentralPoint(pb, trajec);
+                    CreateFigure(figureCoordinatesArray);
+                    pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
+                    breathIncrement -= BreathSpeed;
                 }
             }
         }

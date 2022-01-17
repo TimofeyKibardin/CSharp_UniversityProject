@@ -630,7 +630,7 @@ namespace KibardinTN_Project
             this.Controls.Add(this.pictureBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "mainForm";
-            this.Text = "Form1";
+            this.Text = "Moving Figure App";
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTrajectorySize)).EndInit();

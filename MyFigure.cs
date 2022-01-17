@@ -21,40 +21,40 @@ namespace KibardinTN_Project
         protected override Point[] CreateFigure(Point[] coordinatesArray)
         {
             //Нижний ромб
-            rhombusCenter = new Point((int)X, (int)(Y - (2 * (10 + FigureSize))));
-            figureCoordinatesArray[0] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + FigureSize));
-            figureCoordinatesArray[1] = new Point(rhombusCenter.X - (10 + FigureSize), rhombusCenter.Y);
-            figureCoordinatesArray[2] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + FigureSize));
-            figureCoordinatesArray[3] = new Point(rhombusCenter.X + (10 + FigureSize), rhombusCenter.Y);
+            rhombusCenter = new Point((int)X, (int)(Y - (2 * 10 + breathIncrement + FigureSize)));
+            figureCoordinatesArray[0] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + breathIncrement + FigureSize));
+            figureCoordinatesArray[1] = new Point(rhombusCenter.X - (10 + breathIncrement + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[2] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + breathIncrement + FigureSize));
+            figureCoordinatesArray[3] = new Point(rhombusCenter.X + (10 + breathIncrement + FigureSize), rhombusCenter.Y);
             //Возврат к точке
-            figureCoordinatesArray[4] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + FigureSize));
+            figureCoordinatesArray[4] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + breathIncrement + FigureSize));
 
             //Левый ромб
-            rhombusCenter = new Point((int)(X - (2 * (10 + FigureSize))), (int)Y);
-            figureCoordinatesArray[5] = new Point(rhombusCenter.X + (10 + FigureSize), rhombusCenter.Y);
-            figureCoordinatesArray[6] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + FigureSize));
-            figureCoordinatesArray[7] = new Point(rhombusCenter.X - (10 + FigureSize), rhombusCenter.Y);
-            figureCoordinatesArray[8] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + FigureSize));
+            rhombusCenter = new Point((int)(X - (2 * 10 + breathIncrement + FigureSize)), (int)Y);
+            figureCoordinatesArray[5] = new Point(rhombusCenter.X + (10 + breathIncrement + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[6] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + breathIncrement + FigureSize));
+            figureCoordinatesArray[7] = new Point(rhombusCenter.X - (10 + breathIncrement + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[8] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + breathIncrement + FigureSize));
             //Возврат к точке
-            figureCoordinatesArray[9] = new Point(rhombusCenter.X + (10 + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[9] = new Point(rhombusCenter.X + (10 + breathIncrement + FigureSize), rhombusCenter.Y);
 
             //Верхний ромб
-            rhombusCenter = new Point((int)X, (int)(Y + (2 * (10 + FigureSize))));
-            figureCoordinatesArray[10] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + FigureSize));
-            figureCoordinatesArray[11] = new Point(rhombusCenter.X + (10 + FigureSize), rhombusCenter.Y);
-            figureCoordinatesArray[12] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + FigureSize));
-            figureCoordinatesArray[13] = new Point(rhombusCenter.X - (10 + FigureSize), rhombusCenter.Y);
+            rhombusCenter = new Point((int)X, (int)(Y + (2 * 10 + breathIncrement + FigureSize)));
+            figureCoordinatesArray[10] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + breathIncrement + FigureSize));
+            figureCoordinatesArray[11] = new Point(rhombusCenter.X + (10 + breathIncrement + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[12] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + breathIncrement + FigureSize));
+            figureCoordinatesArray[13] = new Point(rhombusCenter.X - (10 + breathIncrement + FigureSize), rhombusCenter.Y);
             //Возврат к точке
-            figureCoordinatesArray[14] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + FigureSize));
+            figureCoordinatesArray[14] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + breathIncrement + FigureSize));
 
             //Правый ромб
-            rhombusCenter = new Point((int)(X + (2 * (10 + FigureSize))), (int)Y);
-            figureCoordinatesArray[15] = new Point(rhombusCenter.X - (10 + FigureSize), rhombusCenter.Y);
-            figureCoordinatesArray[16] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + FigureSize));
-            figureCoordinatesArray[17] = new Point(rhombusCenter.X + (10 + FigureSize), rhombusCenter.Y);
-            figureCoordinatesArray[18] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + FigureSize));
+            rhombusCenter = new Point((int)(X + (2 * 10 + breathIncrement + FigureSize)), (int)Y);
+            figureCoordinatesArray[15] = new Point(rhombusCenter.X - (10 + breathIncrement + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[16] = new Point(rhombusCenter.X, rhombusCenter.Y - (10 + breathIncrement + FigureSize));
+            figureCoordinatesArray[17] = new Point(rhombusCenter.X + (10 + breathIncrement + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[18] = new Point(rhombusCenter.X, rhombusCenter.Y + (10 + breathIncrement + FigureSize));
             //Возврат к точке
-            figureCoordinatesArray[19] = new Point(rhombusCenter.X - (10 + FigureSize), rhombusCenter.Y);
+            figureCoordinatesArray[19] = new Point(rhombusCenter.X - (10 + breathIncrement + FigureSize), rhombusCenter.Y);
 
             return figureCoordinatesArray;
         }
@@ -85,28 +85,30 @@ namespace KibardinTN_Project
         {
             if (breathStatus)
             {
-                FigureSize += BreathSize + 1;
-                MoveCentralPoint(pb, trajec);
-                CreateFigure(figureCoordinatesArray);
-                pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
-                breathIncrement += 1 + BreathSpeed;
-
-                if (breathIncrement >= 10)
+                if (breathIncrement >= BreathSize + 10)
                 {
                     breathStatus = false;
                 }
+                else
+                {
+                    MoveCentralPoint(pb, trajec);
+                    CreateFigure(figureCoordinatesArray);
+                    pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
+                    breathIncrement += BreathSpeed;
+                }
             }
-            else
+            else if (!breathStatus)
             {
-                FigureSize -= BreathSize + 1;
-                MoveCentralPoint(pb, trajec);
-                CreateFigure(figureCoordinatesArray);
-                pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
-                breathIncrement -= 1 + BreathSpeed;
-
                 if (breathIncrement <= 0)
                 {
                     breathStatus = true;
+                }
+                else
+                {
+                    MoveCentralPoint(pb, trajec);
+                    CreateFigure(figureCoordinatesArray);
+                    pb.CreateGraphics().DrawPolygon(new Pen(FigureColor, 3f), figureCoordinatesArray);
+                    breathIncrement -= BreathSpeed;
                 }
             }
         }

@@ -16,7 +16,7 @@ namespace KibardinTN_Project
 			set { figureSize = value; }
         }
 		public bool IsBreathOn { get; set; } //Включено дыхание или нет
-		protected bool breathStatus = true; //
+		protected bool breathStatus = true; //Дышит фигура или нет
 		protected int breathIncrement = 1;
 		public int BreathSpeed { get; set; }
 		public int BreathSize { get; set; }
@@ -28,7 +28,7 @@ namespace KibardinTN_Project
 			set { centerMovingSpeed = value; }
         }
 		private bool isEndOfLine = false; //Флаг, означающий конец линии
-		private int i = 0; //Счётчик
+		private int i = 1;
 
 		private Color figureColor = Color.Black; //Базовый цвет фигуры
 		public Color FigureColor

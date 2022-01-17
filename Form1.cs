@@ -18,22 +18,31 @@ namespace KibardinTN_Project
         {
             InitializeComponent();
             comboBoxFigure.Items.AddRange(new string[] { "Квадрат", "Треугольник", "Фигура_Вариант8" });
-
+            //Текстовые ячейки
             comboBoxFigure.Text = Properties.Settings.Default.textBoxText;
             textBox2.Text = Properties.Settings.Default.textBoxText2;
             textBox3.Text = Properties.Settings.Default.textBoxText3;
             textBox4.Text = Properties.Settings.Default.textBoxText4;
             textBox5.Text = Properties.Settings.Default.textBoxText5;
+            //Цвета
             trajectory.TrajectoryColor = Properties.Settings.Default.trajectoryColor;
             figure.FigureColor = Properties.Settings.Default.figureColor;
             pictureBox.BackColor = Properties.Settings.Default.backgroundColor;
+            //Фигура
             trackBarFigureSize.Value = Properties.Settings.Default.figureSize;
+            figure.FigureSize = trackBarTrajectorySize.Value;
             trackBarFigureSpeed.Value = Properties.Settings.Default.figureCenterMovingSpeed;
+            figure.CenterMovingSpeed = Properties.Settings.Default.figureCenterMovingSpeed;
+            //Дыхание
             trackBarBreathSize.Value = Properties.Settings.Default.breathSize;
+            figure.BreathSize = trackBarBreathSize.Value;
             trackBarBreathSpeed.Value = Properties.Settings.Default.breathSpeed;
-            trackBarTrajectorySize.Value = Properties.Settings.Default.trajectorySize;
-            Timer.Enabled = Properties.Settings.Default.timerIsOn;
+            figure.BreathSpeed = trackBarBreathSpeed.Value;
             figure.IsBreathOn = Properties.Settings.Default.breathIsOn;
+            //Траектория
+            trackBarTrajectorySize.Value = Properties.Settings.Default.trajectorySize;
+            //Таймер
+            Timer.Enabled = Properties.Settings.Default.timerIsOn;
         }
 
         Trajectory trajectory = new Ellipse(); //Создание объекта траектории
@@ -52,6 +61,8 @@ namespace KibardinTN_Project
             Properties.Settings.Default.trajectoryColor = trajectory.TrajectoryColor; //Цвет траектории
             Properties.Settings.Default.figureColor = figure.FigureColor; //Цвет фигуры
             Properties.Settings.Default.backgroundColor = pictureBox.BackColor; //Цвет фона
+            Properties.Settings.Default.figureSize = trackBarFigureSize.Value; //Размер фигуры
+            Properties.Settings.Default.figureCenterMovingSpeed = trackBarFigureSpeed.Value; //Скорость движения фигуры
             Properties.Settings.Default.breathSize = trackBarBreathSize.Value; //Значение величины дыхания
             Properties.Settings.Default.breathSpeed = trackBarBreathSpeed.Value; //Значение скорости дыхания
             Properties.Settings.Default.trajectorySize = trackBarTrajectorySize.Value; //Значение размера траектории
@@ -307,11 +318,11 @@ namespace KibardinTN_Project
                 pasteTextArray = Clipboard.GetText().Split(',');
             }
 
-        comboBoxFigure.Text = pasteTextArray[0];
-        textBox2.Text = pasteTextArray[1];
-        textBox3.Text = pasteTextArray[2];
-        textBox4.Text = pasteTextArray[3];
-        textBox5.Text = pasteTextArray[4];
+            comboBoxFigure.Text = pasteTextArray[0];
+            textBox2.Text = pasteTextArray[1];
+            textBox3.Text = pasteTextArray[2];
+            textBox4.Text = pasteTextArray[3];
+            textBox5.Text = pasteTextArray[4];
         }
     }
 }
