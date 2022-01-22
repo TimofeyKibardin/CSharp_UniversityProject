@@ -42,34 +42,34 @@ namespace KibardinTN_Project
 		 */
 		protected void MoveCentralPoint(PictureBox pb, Trajectory trajectory)
         {
-			trajectory.Draw(pb);
-			if (isEndOfLine)
+            trajectory.Draw(pb);
+            if (isEndOfLine)
             {
-				if (i >= trajectory.TrajectoryPoints.Length - 1)
+                if (i >= trajectory.TrajectoryPoints.Length - 1)
                 {
-					isEndOfLine = false;
+                    isEndOfLine = false;
                 }
-				else
+                else
                 {
-					if (i < (int)trajectory.AngleStart) i = (int)trajectory.AngleStart;
-					X = trajectory.TrajectoryPoints[i].X;
-					Y = trajectory.TrajectoryPoints[i].Y;
-					i += centerMovingSpeed;
-				}
+                    if (i < (int)trajectory.AngleStart) i = (int)trajectory.AngleStart;
+                    X = trajectory.TrajectoryPoints[i].X;
+                    Y = trajectory.TrajectoryPoints[i].Y;
+                    i += centerMovingSpeed;
+                }
             }
-			else
+            else
             {
-				if (i == trajectory.AngleStart || i < trajectory.AngleStart)
+                if (i == trajectory.AngleStart || i < trajectory.AngleStart)
                 {
-					isEndOfLine = true;
+                    isEndOfLine = true;
                 }
-				else
+                else
                 {
-					if (i > trajectory.TrajectoryPoints.Length - 1) i = trajectory.TrajectoryPoints.Length - 1;
-					X = trajectory.TrajectoryPoints[i].X;
-					Y = trajectory.TrajectoryPoints[i].Y;
-					i -= centerMovingSpeed;
-				}
+                    if (i > trajectory.TrajectoryPoints.Length - 1) i = trajectory.TrajectoryPoints.Length - 1;
+                    X = trajectory.TrajectoryPoints[i].X;
+                    Y = trajectory.TrajectoryPoints[i].Y;
+                    i -= centerMovingSpeed;
+                }
             }
         }
 

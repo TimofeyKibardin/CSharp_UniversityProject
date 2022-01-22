@@ -202,5 +202,65 @@ namespace KibardinTN_Project.Properties {
                 this["breathIsOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int trajectoryKeyValue {
+            get {
+                return ((int)(this["trajectoryKeyValue"]));
+            }
+            set {
+                this["trajectoryKeyValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double angleStartValue {
+            get {
+                return ((double)(this["angleStartValue"]));
+            }
+            set {
+                this["angleStartValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double angleLimitValue {
+            get {
+                return ((double)(this["angleLimitValue"]));
+            }
+            set {
+                this["angleLimitValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int figureKeyValue {
+            get {
+                return ((int)(this["figureKeyValue"]));
+            }
+            set {
+                this["figureKeyValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string figureNameValue {
+            get {
+                return ((string)(this["figureNameValue"]));
+            }
+            set {
+                this["figureNameValue"] = value;
+            }
+        }
     }
 }

@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
-    
-	public class UserTrajectory : Trajectory
+	public class Hypocycloid : Trajectory
 	{
-		public UserTrajectory(double fi1, double fi2)
-		{
-            AngleStart = fi1;
-            AngleLimit = fi2;
-		}
+		public Hypocycloid()
+        {
+            AngleStart = 0;
+            AngleLimit = 2 * Math.PI;
+        }
+
+        private double radius = 20;
+        public double Radius
+        {
+            get { return radius; }
+            set { radius = value; }
+        }
+        private int k = 6;
 
         public override void Draw(PictureBox pb)
         {
@@ -30,8 +36,8 @@ namespace KibardinTN_Project
              */
             for (int i = 0; i < TrajectoryPoints.Length; i++)
             {
-                X = XStart + b * Math.Cos(AngleNextValue) * Scale;
-                Y = YStart - a * Math.Sin(AngleNextValue) * Scale;
+                X = XStart + radius * (k - 1) * (Math.Cos(AngleNextValue) + (Math.Cos((k - 1) * AngleNextValue) / (k - 1))) * Scale;
+                Y = YStart + radius * (k - 1) * (Math.Sin(AngleNextValue) - (Math.Sin((k - 1) * AngleNextValue) / (k - 1))) * Scale;
                 TrajectoryPoints[i] = new Point((int)X, (int)Y);
                 AngleNextValue += Step;
             }

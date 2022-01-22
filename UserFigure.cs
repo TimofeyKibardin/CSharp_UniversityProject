@@ -16,27 +16,57 @@ namespace KibardinTN_Project
             this.figureName = figureName;
         }
         String figureName;
-        private Point squareCenter; //Центр квадрата
-        private Point triangleCenter; //Центр треугольника
+        private Point figureCenter;
 
         protected override Point[] CreateFigure(Point[] coordinatesArray)
         {
             if (figureName.Equals("КВАДРАТ"))
             {
                 figureCoordinatesArray = new Point[4];
-                squareCenter = new Point((int)X, (int)Y);
-                figureCoordinatesArray[0] = new Point(squareCenter.X - (FigureSize + 20 + breathIncrement), squareCenter.Y + (FigureSize + 20 + breathIncrement));
-                figureCoordinatesArray[1] = new Point(squareCenter.X + (FigureSize + 20 + breathIncrement), squareCenter.Y + (FigureSize + 20 + breathIncrement));
-                figureCoordinatesArray[2] = new Point(squareCenter.X + (FigureSize + 20 + breathIncrement), squareCenter.Y - (FigureSize + 20 + breathIncrement));
-                figureCoordinatesArray[3] = new Point(squareCenter.X - (FigureSize + 20 + breathIncrement), squareCenter.Y - (FigureSize + 20 + breathIncrement));
+                figureCenter = new Point((int)X, (int)Y);
+                figureCoordinatesArray[0] = new Point(figureCenter.X - (FigureSize + 20 + breathIncrement), figureCenter.Y + (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[1] = new Point(figureCenter.X + (FigureSize + 20 + breathIncrement), figureCenter.Y + (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[2] = new Point(figureCenter.X + (FigureSize + 20 + breathIncrement), figureCenter.Y - (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[3] = new Point(figureCenter.X - (FigureSize + 20 + breathIncrement), figureCenter.Y - (FigureSize + 20 + breathIncrement));
             }
             if (figureName.Equals("ТРЕУГОЛЬНИК"))
             {
                 figureCoordinatesArray = new Point[3];
-                triangleCenter = new Point((int)X, (int)Y);
-                figureCoordinatesArray[0] = new Point(triangleCenter.X, triangleCenter.Y + (FigureSize + breathIncrement + 10));
-                figureCoordinatesArray[1] = new Point(triangleCenter.X + (FigureSize + 10 + breathIncrement), triangleCenter.Y - (FigureSize + 10 + breathIncrement));
-                figureCoordinatesArray[2] = new Point(triangleCenter.X - (FigureSize + 10 + breathIncrement), triangleCenter.Y - (FigureSize + 10 + breathIncrement));
+                figureCenter = new Point((int)X, (int)Y);
+                figureCoordinatesArray[0] = new Point(figureCenter.X, figureCenter.Y + (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[1] = new Point(figureCenter.X + (FigureSize + 20 + breathIncrement), figureCenter.Y - (FigureSize + 20 + breathIncrement));
+                figureCoordinatesArray[2] = new Point(figureCenter.X - (FigureSize + 20 + breathIncrement), figureCenter.Y - (FigureSize + 20 + breathIncrement));
+            }
+            if (figureName.Equals("ФИГУРА_ВАРИАНТ19"))
+            {
+                figureCoordinatesArray = new Point[21];
+                figureCenter = new Point((int)X, (int)Y);
+
+                //Верхний прямоугольник
+                figureCoordinatesArray[0] = new Point(figureCenter.X, figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[1] = new Point(figureCenter.X - (FigureSize + 15 + breathIncrement), figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[2] = new Point(figureCenter.X - (FigureSize + 15 + breathIncrement), figureCenter.Y + (FigureSize + 15 + breathIncrement));
+                figureCoordinatesArray[3] = new Point(figureCenter.X + (FigureSize + 15 + breathIncrement), figureCenter.Y + (FigureSize + 15 + breathIncrement));
+                figureCoordinatesArray[4] = new Point(figureCenter.X + (FigureSize + 15 + breathIncrement), figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[5] = new Point(figureCenter.X, figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                //Левый прямоугольник
+                figureCoordinatesArray[6] = new Point(figureCenter.X, figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[7] = new Point(figureCenter.X - (FigureSize + 30 + breathIncrement), figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[8] = new Point(figureCenter.X - (FigureSize + 30 + breathIncrement), figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[9] = new Point(figureCenter.X, figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[10] = new Point(figureCenter.X, figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                //Правый прямоугольник
+                figureCoordinatesArray[11] = new Point(figureCenter.X + (FigureSize + 30 + breathIncrement), figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[12] = new Point(figureCenter.X + (FigureSize + 30 + breathIncrement), figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[13] = new Point(figureCenter.X, figureCenter.Y + (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[14] = new Point(figureCenter.X, figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                //Нижний прямоугольник
+                figureCoordinatesArray[15] = new Point(figureCenter.X - (FigureSize + 15 + breathIncrement), figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[16] = new Point(figureCenter.X - (FigureSize + 15 + breathIncrement), figureCenter.Y - (FigureSize + 15 + breathIncrement));
+                figureCoordinatesArray[17] = new Point(figureCenter.X + (FigureSize + 15 + breathIncrement), figureCenter.Y - (FigureSize + 15 + breathIncrement));
+                figureCoordinatesArray[18] = new Point(figureCenter.X + (FigureSize + 15 + breathIncrement), figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[19] = new Point(figureCenter.X, figureCenter.Y - (FigureSize + 5 + breathIncrement));
+                figureCoordinatesArray[20] = new Point(figureCenter.X, figureCenter.Y + (FigureSize + 5 + breathIncrement));
             }
 
             return figureCoordinatesArray;

@@ -17,39 +17,33 @@ namespace KibardinTN_Project
         public mainForm()
         {
             InitializeComponent();
-            comboBoxFigure.Items.AddRange(new string[] { "Квадрат", "Треугольник", "Фигура_Вариант8" });
-            //Текстовые ячейки
-            comboBoxFigure.Text = Properties.Settings.Default.textBoxText;
-            textBox2.Text = Properties.Settings.Default.textBoxText2;
-            textBox3.Text = Properties.Settings.Default.textBoxText3;
-            textBox4.Text = Properties.Settings.Default.textBoxText4;
-            textBox5.Text = Properties.Settings.Default.textBoxText5;
-            //Цвета
-            trajectory.TrajectoryColor = Properties.Settings.Default.trajectoryColor;
-            figure.FigureColor = Properties.Settings.Default.figureColor;
-            pictureBox.BackColor = Properties.Settings.Default.backgroundColor;
-            //Фигура
-            trackBarFigureSize.Value = Properties.Settings.Default.figureSize;
-            figure.FigureSize = trackBarTrajectorySize.Value;
-            trackBarFigureSpeed.Value = Properties.Settings.Default.figureCenterMovingSpeed;
-            figure.CenterMovingSpeed = Properties.Settings.Default.figureCenterMovingSpeed;
-            //Дыхание
-            trackBarBreathSize.Value = Properties.Settings.Default.breathSize;
-            figure.BreathSize = trackBarBreathSize.Value;
-            trackBarBreathSpeed.Value = Properties.Settings.Default.breathSpeed;
-            figure.BreathSpeed = trackBarBreathSpeed.Value;
-            figure.IsBreathOn = Properties.Settings.Default.breathIsOn;
-            //Траектория
-            trackBarTrajectorySize.Value = Properties.Settings.Default.trajectorySize;
-            //Таймер
-            Timer.Enabled = Properties.Settings.Default.timerIsOn;
+            //Добавление наименований в выпадающий список
+            comboBoxFigure.Items.AddRange(new string[] { "Квадрат", "Треугольник", "Фигура_Вариант8", "Фигура_Вариант19" });
+            //Загрузка параметров из Settings
+            LoadSettings();
         }
 
-        Trajectory trajectory = new Ellipse(); //Создание объекта траектории
+        Trajectory trajectory = new Ellipse(); //Создание объекта траектории, базовое создание траектории без сохранения
         MoveableObject figure = new MyFigure(); //Создание объекта фигуры
-        String figureName; //Имя фигуры, переменная для текстбокса
+        static String figureName = ""; //Имя фигуры, переменная для текстбокса
         StringBuilder wordForCopy = new StringBuilder(); //Строка для скопированного текста
         DateTime localTime = DateTime.Now; //Локальное время для обработчика ошибок
+        Dictionary<int, Trajectory> trajectoryList = new Dictionary<int, Trajectory>() //Словарь для траекторий
+        {
+            {1, new Ellipse() },
+            {2, new Epicycloid() },
+            {3, new Hypocycloid() }
+        };
+        int trajectoryKey = 0; //Ключ к траектории
+        static double fi1; //не работает сохранение
+        static double fi2; //не работает сохранение
+        /*Dictionary<int, MoveableObject> figureList = new Dictionary<int, MoveableObject>() //Словарь для фигур
+        {
+            {1, new MyFigure() },
+            {2, new UserFigure(figureName) }
+        };
+        int figureKey = 0; //Ключ к фигуре*/
+
 
         private void Click_SaveSettings(object sender, EventArgs e)
         {
@@ -68,7 +62,49 @@ namespace KibardinTN_Project
             Properties.Settings.Default.trajectorySize = trackBarTrajectorySize.Value; //Значение размера траектории
             Properties.Settings.Default.timerIsOn = Timer.Enabled; //Включено ли движение фигуры
             Properties.Settings.Default.breathIsOn = figure.IsBreathOn; //Включено ли дыхание фигуры
+            Properties.Settings.Default.trajectoryKeyValue = trajectoryKey; //Ключ для создания траектории
+            /*Properties.Settings.Default.angleStartValue = fi1;
+            Properties.Settings.Default.angleLimitValue = fi2;
+            Properties.Settings.Default.figureKeyValue = figureKey; //Ключ для создания фигуры
+            Properties.Settings.Default.figureNameValue = figureName; //Имя для создания фигуры*/
             Properties.Settings.Default.Save(); //Сохранение
+        }
+
+        private void LoadSettings()
+        {
+            //Текстовые ячейки
+            comboBoxFigure.Text = Properties.Settings.Default.textBoxText;
+            textBox2.Text = Properties.Settings.Default.textBoxText2;
+            textBox3.Text = Properties.Settings.Default.textBoxText3;
+            textBox4.Text = Properties.Settings.Default.textBoxText4;
+            textBox5.Text = Properties.Settings.Default.textBoxText5;
+            //Траектория
+            trajectoryKey = Properties.Settings.Default.trajectoryKeyValue;
+            trajectory = trajectoryList.GetValueOrDefault(trajectoryKey);
+            trackBarTrajectorySize.Value = Properties.Settings.Default.trajectorySize;
+            fi1 = Properties.Settings.Default.angleStartValue;
+            fi2 = Properties.Settings.Default.angleLimitValue;
+            //Фигура
+            trackBarFigureSize.Value = Properties.Settings.Default.figureSize;
+            figure.FigureSize = trackBarTrajectorySize.Value;
+            trackBarFigureSpeed.Value = Properties.Settings.Default.figureCenterMovingSpeed;
+            figure.CenterMovingSpeed = Properties.Settings.Default.figureCenterMovingSpeed;
+            //Дыхание
+            trackBarBreathSize.Value = Properties.Settings.Default.breathSize;
+            figure.BreathSize = trackBarBreathSize.Value;
+            trackBarBreathSpeed.Value = Properties.Settings.Default.breathSpeed;
+            figure.BreathSpeed = trackBarBreathSpeed.Value;
+            figure.IsBreathOn = Properties.Settings.Default.breathIsOn;
+            //Цвета
+            trajectory.TrajectoryColor = Properties.Settings.Default.trajectoryColor;
+            figure.FigureColor = Properties.Settings.Default.figureColor;
+            pictureBox.BackColor = Properties.Settings.Default.backgroundColor;
+            //Таймер
+            Timer.Enabled = Properties.Settings.Default.timerIsOn;
+
+            /*figureName = Properties.Settings.Default.figureNameValue;
+            figureKey = Properties.Settings.Default.figureKeyValue;
+            figure = figureList.GetValueOrDefault(figureKey);*/
         }
 
         //Изменение размера главной формы
@@ -194,9 +230,10 @@ namespace KibardinTN_Project
             {
                 figureName = Convert.ToString(comboBoxFigure.Text).ToUpper();
 
-                if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК"))
+                if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК") || figureName.Equals("ФИГУРА_ВАРИАНТ19"))
                 {
                     figure = new UserFigure(figureName);
+                    //figureKey = 2;
                     figure.Move(pictureBox, trajectory);
                     figure.FigureColor = chooseColor.Color;
                     richTextBox1.Text = localTime + "\nУспешно!";
@@ -205,6 +242,7 @@ namespace KibardinTN_Project
                 else if (figureName.Equals("ФИГУРА_ВАРИАНТ8"))
                 {
                     figure = new MyFigure();
+                    //figureKey = 1;
                     figure.Move(pictureBox, trajectory);
                     figure.FigureColor = chooseColor.Color;
                     richTextBox1.Text = localTime + "\nУспешно!";
@@ -232,14 +270,10 @@ namespace KibardinTN_Project
                 if ((!String.IsNullOrWhiteSpace(textBox2.Text)) && (!String.IsNullOrWhiteSpace(textBox3.Text))
                     && (!String.IsNullOrWhiteSpace(textBox4.Text)) && (!String.IsNullOrWhiteSpace(textBox5.Text)))
                 {
-                    double fi1 = Double.Parse(textBox2.Text) * Math.PI / Double.Parse(textBox3.Text);
-                    double fi2 = Double.Parse(textBox4.Text) * Math.PI / Double.Parse(textBox5.Text);
+                    fi1 = Double.Parse(textBox2.Text) * Math.PI / Double.Parse(textBox3.Text);
+                    fi2 = Double.Parse(textBox4.Text) * Math.PI / Double.Parse(textBox5.Text);
 
-                    trajectory = new UserTrajectory
-                    {
-                        AngleStart = fi1,
-                        AngleLimit = fi2
-                    };
+                    trajectory = new UserTrajectory(fi1, fi2);
 
                     trajectory.TrajectoryColor = chooseColor.Color;
                     trajectory.Draw(pictureBox);
@@ -260,21 +294,33 @@ namespace KibardinTN_Project
             }
         }
 
-        //Кнопка, отвечающая за отрисовку траектории в виде половины эпициклоида
-        private void Click_DrawCloud(object sender, EventArgs e)
-        {
-            trajectory = new Epicycloid();
-            trajectory.TrajectoryColor = chooseColor.Color;
-            trajectory.Draw(pictureBox);
-            Refresh();
-        }
-
         //Кнопка, отвечающая за отрисовку изначальной траектории
         private void Click_DrawTrajectoryVariant8(object sender, EventArgs e)
         {
             trajectory = new Ellipse();
             trajectory.TrajectoryColor = chooseColor.Color;
             trajectory.Draw(pictureBox);
+            trajectoryKey = 1;
+            Refresh();
+        }
+
+        //Кнопка, отвечающая за отрисовку траектории в виде половины эпициклоида
+        private void Click_DrawCloud(object sender, EventArgs e)
+        {
+            trajectory = new Epicycloid();
+            trajectory.TrajectoryColor = chooseColor.Color;
+            trajectory.Draw(pictureBox);
+            trajectoryKey = 2;
+            Refresh();
+        }
+
+        //Кнопка, отвечающая за отрисовку траектории в виде гипоциклоиды
+        private void Click_DrawHypocycloid(object sender, EventArgs e)
+        {
+            trajectory = new Hypocycloid();
+            trajectory.TrajectoryColor = chooseColor.Color;
+            trajectory.Draw(pictureBox);
+            trajectoryKey = 3;
             Refresh();
         }
 
@@ -282,27 +328,57 @@ namespace KibardinTN_Project
         private void Click_CopyText(object sender, EventArgs e)
         {
             Clipboard.Clear();
-
+            //1-ая текстовая ячейка
             if (!String.IsNullOrWhiteSpace(comboBoxFigure.Text))
             {
                 wordForCopy.Append(comboBoxFigure.Text).Append(',');
             }
+            else
+            {
+                wordForCopy.Append(" ,");
+            }
+            //2-ая текстовая ячейка
             if (!String.IsNullOrWhiteSpace(textBox2.Text))
             {
                 wordForCopy.Append(textBox2.Text).Append(',');
             }
+            else
+            {
+                wordForCopy.Append(" ,");
+            }
+            //3-ая текстовая ячейка
             if (!String.IsNullOrWhiteSpace(textBox3.Text))
             {
                 wordForCopy.Append(textBox3.Text).Append(',');
             }
+            else
+            {
+                wordForCopy.Append(" ,");
+            }
+
             if (!String.IsNullOrWhiteSpace(textBox4.Text))
             {
                 wordForCopy.Append(textBox4.Text).Append(',');
             }
+            else
+            {
+                wordForCopy.Append(" ,");
+            }
+
             if (!String.IsNullOrWhiteSpace(textBox5.Text))
             {
                 wordForCopy.Append(textBox5.Text);
             }
+            else
+            {
+                wordForCopy.Append(" ,");
+            }
+
+            /*_ = richTextBox1.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
+            _ = textBox2.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
+            _ = textBox3.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
+            _ = textBox4.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
+            _ = textBox5.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");*/
 
             Clipboard.SetDataObject(wordForCopy.ToString());
             wordForCopy.Clear();
@@ -313,7 +389,7 @@ namespace KibardinTN_Project
         {
             String[] pasteTextArray = new String[5];
             IDataObject iData = Clipboard.GetDataObject();
-            if (iData.GetDataPresent(typeof(String)))
+            if (iData.GetDataPresent(typeof(String)) && Clipboard.GetDataObject() != null)
             {
                 pasteTextArray = Clipboard.GetText().Split(',');
             }

@@ -16,13 +16,13 @@ namespace KibardinTN_Project
 		protected double a = 200;
 		protected double b = 140;
 
-		private double angleStart = 0; //Начальный угол
+		private double angleStart = 0; //Начальный угол, базовое значение
 		public double AngleStart
         {
 			get { return angleStart; }
 			set { angleStart = value; }
         }
-		private double angleLimit = Math.PI; //Конечный угол
+		private double angleLimit = Math.PI; //Конечный угол, базовое значение
 		public double AngleLimit
         {
 			get { return angleLimit; }
