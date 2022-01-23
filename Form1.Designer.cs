@@ -14,6 +14,7 @@ namespace KibardinTN_Project
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            ChangeClipboardChain(this.Handle, nextClipboardViewer);
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -34,6 +35,7 @@ namespace KibardinTN_Project
             this.trackBarTrajectorySize = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.buttonTrajectoryHypocycloid = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.comboBoxFigure = new System.Windows.Forms.ComboBox();
@@ -77,7 +79,6 @@ namespace KibardinTN_Project
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.chooseColor = new System.Windows.Forms.ColorDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.buttonTrajectoryHypocycloid = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTrajectorySize)).BeginInit();
             this.controlPanel.SuspendLayout();
@@ -173,15 +174,26 @@ namespace KibardinTN_Project
             this.controlPanel.Size = new System.Drawing.Size(448, 931);
             this.controlPanel.TabIndex = 3;
             // 
+            // buttonTrajectoryHypocycloid
+            // 
+            this.buttonTrajectoryHypocycloid.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTrajectoryHypocycloid.Location = new System.Drawing.Point(275, 531);
+            this.buttonTrajectoryHypocycloid.Name = "buttonTrajectoryHypocycloid";
+            this.buttonTrajectoryHypocycloid.Size = new System.Drawing.Size(94, 29);
+            this.buttonTrajectoryHypocycloid.TabIndex = 42;
+            this.buttonTrajectoryHypocycloid.Text = "Гипоцикл.";
+            this.buttonTrajectoryHypocycloid.UseVisualStyleBackColor = true;
+            this.buttonTrajectoryHypocycloid.Click += new System.EventHandler(this.Click_DrawHypocycloid);
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label17.Location = new System.Drawing.Point(6, 708);
+            this.label17.Location = new System.Drawing.Point(3, 708);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(192, 21);
+            this.label17.Size = new System.Drawing.Size(195, 21);
             this.label17.TabIndex = 41;
-            this.label17.Text = "Сообщение об ошибке";
+            this.label17.Text = "Служебное сообщение";
             // 
             // richTextBox1
             // 
@@ -602,17 +614,6 @@ namespace KibardinTN_Project
             // 
             this.Timer.Interval = 50;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
-            // 
-            // buttonTrajectoryHypocycloid
-            // 
-            this.buttonTrajectoryHypocycloid.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonTrajectoryHypocycloid.Location = new System.Drawing.Point(275, 531);
-            this.buttonTrajectoryHypocycloid.Name = "buttonTrajectoryHypocycloid";
-            this.buttonTrajectoryHypocycloid.Size = new System.Drawing.Size(94, 29);
-            this.buttonTrajectoryHypocycloid.TabIndex = 42;
-            this.buttonTrajectoryHypocycloid.Text = "Гипоцикл.";
-            this.buttonTrajectoryHypocycloid.UseVisualStyleBackColor = true;
-            this.buttonTrajectoryHypocycloid.Click += new System.EventHandler(this.Click_DrawHypocycloid);
             // 
             // mainForm
             // 

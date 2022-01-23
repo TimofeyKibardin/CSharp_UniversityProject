@@ -4,7 +4,6 @@ using System.Windows.Forms;
 
 namespace KibardinTN_Project
 {
-    
     public class Epicycloid : Trajectory
 	{
 		public Epicycloid()

@@ -1,28 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Xml.Serialization;
+using System.Runtime.InteropServices;
 
 namespace KibardinTN_Project
 {
     public partial class mainForm : Form
     {
+        IntPtr nextClipboardViewer;
+
         public mainForm()
         {
             InitializeComponent();
+            nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
             //Добавление наименований в выпадающий список
             comboBoxFigure.Items.AddRange(new string[] { "Квадрат", "Треугольник", "Фигура_Вариант8", "Фигура_Вариант19" });
             //Загрузка параметров из Settings
             LoadSettings();
         }
 
+        /*
+         * Блок кода, отвечающий за вывод сообщений об изменении содержимого буфера обмена
+         */
+        [DllImport("User32.dll")]
+        protected static extern int SetClipboardViewer(int hWndNewViewer);
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        public static extern bool ChangeClipboardChain(IntPtr hWndRemove, IntPtr hWndNewNext);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        
+        protected override void WndProc(ref System.Windows.Forms.Message m)
+        {
+            const int WM_DRAWCLIPBOARD = 0x308;
+            const int WM_CHANGECBCHAIN = 0x030D;
+
+            switch (m.Msg)
+            {
+                case WM_DRAWCLIPBOARD:
+                    DisplayClipboardData();
+                    SendMessage(nextClipboardViewer, m.Msg, m.WParam,
+                    m.LParam);
+                    break;
+
+                case WM_CHANGECBCHAIN:
+                    if (m.WParam == nextClipboardViewer)
+                        nextClipboardViewer = m.LParam;
+                    else
+                        SendMessage(nextClipboardViewer, m.Msg, m.WParam,
+                        m.LParam);
+                    break;
+
+                default:
+                    base.WndProc(ref m);
+                    break;
+            }
+        }
+
+        void DisplayClipboardData()
+        {
+            try
+            {
+                IDataObject iData = new DataObject();
+                iData = Clipboard.GetDataObject();
+
+                if (iData.GetDataPresent(DataFormats.Rtf))
+                {
+                    richTextBox1.Rtf = "Скопировано: " + (string)iData.GetData(DataFormats.Rtf);
+                    richTextBox1.BackColor = Color.Gold;
+                }
+                else if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    richTextBox1.Text = "Скопировано: " + (string)iData.GetData(DataFormats.Text);
+                    richTextBox1.BackColor = Color.Gold;
+                }
+                else
+                {
+                    richTextBox1.Text = "В буфере обмена должен находиться текст";
+                    richTextBox1.BackColor = Color.LightCoral;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        /*
+         * Переменные
+         */
         Trajectory trajectory = new Ellipse(); //Создание объекта траектории, базовое создание траектории без сохранения
         MoveableObject figure = new MyFigure(); //Создание объекта фигуры
         static String figureName = ""; //Имя фигуры, переменная для текстбокса
@@ -35,16 +102,10 @@ namespace KibardinTN_Project
             {3, new Hypocycloid() }
         };
         int trajectoryKey = 0; //Ключ к траектории
-        static double fi1; //не работает сохранение
-        static double fi2; //не работает сохранение
-        /*Dictionary<int, MoveableObject> figureList = new Dictionary<int, MoveableObject>() //Словарь для фигур
-        {
-            {1, new MyFigure() },
-            {2, new UserFigure(figureName) }
-        };
-        int figureKey = 0; //Ключ к фигуре*/
+        static double fi1; //Начальное ограничение
+        static double fi2; //Конечное ограничение
 
-
+        //Сохранение настроек
         private void Click_SaveSettings(object sender, EventArgs e)
         {
             Properties.Settings.Default.textBoxText = comboBoxFigure.Text; //Первый текст бокс
@@ -63,13 +124,12 @@ namespace KibardinTN_Project
             Properties.Settings.Default.timerIsOn = Timer.Enabled; //Включено ли движение фигуры
             Properties.Settings.Default.breathIsOn = figure.IsBreathOn; //Включено ли дыхание фигуры
             Properties.Settings.Default.trajectoryKeyValue = trajectoryKey; //Ключ для создания траектории
-            /*Properties.Settings.Default.angleStartValue = fi1;
-            Properties.Settings.Default.angleLimitValue = fi2;
-            Properties.Settings.Default.figureKeyValue = figureKey; //Ключ для создания фигуры
-            Properties.Settings.Default.figureNameValue = figureName; //Имя для создания фигуры*/
+            Properties.Settings.Default.angleStartValue = fi1; //Начальный угол траектории
+            Properties.Settings.Default.angleLimitValue = fi2; //Конечный угол траектории
             Properties.Settings.Default.Save(); //Сохранение
         }
 
+        //Загрузка сохранённых настроек
         private void LoadSettings()
         {
             //Текстовые ячейки
@@ -101,10 +161,6 @@ namespace KibardinTN_Project
             pictureBox.BackColor = Properties.Settings.Default.backgroundColor;
             //Таймер
             Timer.Enabled = Properties.Settings.Default.timerIsOn;
-
-            /*figureName = Properties.Settings.Default.figureNameValue;
-            figureKey = Properties.Settings.Default.figureKeyValue;
-            figure = figureList.GetValueOrDefault(figureKey);*/
         }
 
         //Изменение размера главной формы
@@ -233,19 +289,17 @@ namespace KibardinTN_Project
                 if (figureName.Equals("КВАДРАТ") || figureName.Equals("ТРЕУГОЛЬНИК") || figureName.Equals("ФИГУРА_ВАРИАНТ19"))
                 {
                     figure = new UserFigure(figureName);
-                    //figureKey = 2;
                     figure.Move(pictureBox, trajectory);
                     figure.FigureColor = chooseColor.Color;
-                    richTextBox1.Text = localTime + "\nУспешно!";
+                    richTextBox1.Text = localTime + "\nФигура изменена!";
                     richTextBox1.BackColor = Color.GreenYellow;
                 }
                 else if (figureName.Equals("ФИГУРА_ВАРИАНТ8"))
                 {
                     figure = new MyFigure();
-                    //figureKey = 1;
                     figure.Move(pictureBox, trajectory);
                     figure.FigureColor = chooseColor.Color;
-                    richTextBox1.Text = localTime + "\nУспешно!";
+                    richTextBox1.Text = localTime + "\nФигура изменена!";
                     richTextBox1.BackColor = Color.GreenYellow;
                 }
                 else
@@ -302,6 +356,8 @@ namespace KibardinTN_Project
             trajectory.Draw(pictureBox);
             trajectoryKey = 1;
             Refresh();
+            richTextBox1.Text = localTime + "\nТраектория изменена!";
+            richTextBox1.BackColor = Color.GreenYellow;
         }
 
         //Кнопка, отвечающая за отрисовку траектории в виде половины эпициклоида
@@ -312,6 +368,8 @@ namespace KibardinTN_Project
             trajectory.Draw(pictureBox);
             trajectoryKey = 2;
             Refresh();
+            richTextBox1.Text = localTime + "\nТраектория изменена!";
+            richTextBox1.BackColor = Color.GreenYellow;
         }
 
         //Кнопка, отвечающая за отрисовку траектории в виде гипоциклоиды
@@ -322,6 +380,8 @@ namespace KibardinTN_Project
             trajectory.Draw(pictureBox);
             trajectoryKey = 3;
             Refresh();
+            richTextBox1.Text = localTime + "\nТраектория изменена!";
+            richTextBox1.BackColor = Color.GreenYellow;
         }
 
         //Кнопка, отвечающая за копирование текста из текстовых ячеек
@@ -373,12 +433,6 @@ namespace KibardinTN_Project
             {
                 wordForCopy.Append(" ,");
             }
-
-            /*_ = richTextBox1.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
-            _ = textBox2.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
-            _ = textBox3.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
-            _ = textBox4.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");
-            _ = textBox5.Text.Length.ToString() != null ? wordForCopy.Append(textBox2.Text).Append(',') : wordForCopy.Append(" ,");*/
 
             Clipboard.SetDataObject(wordForCopy.ToString());
             wordForCopy.Clear();

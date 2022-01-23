@@ -238,29 +238,5 @@ namespace KibardinTN_Project.Properties {
                 this["angleLimitValue"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int figureKeyValue {
-            get {
-                return ((int)(this["figureKeyValue"]));
-            }
-            set {
-                this["figureKeyValue"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string figureNameValue {
-            get {
-                return ((string)(this["figureNameValue"]));
-            }
-            set {
-                this["figureNameValue"] = value;
-            }
-        }
     }
 }

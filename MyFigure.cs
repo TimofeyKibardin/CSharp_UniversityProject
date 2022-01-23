@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace KibardinTN_Project
 {
@@ -114,8 +113,8 @@ namespace KibardinTN_Project
         }
 
         public override void Draw(PictureBox pb)
-    {
-        throw new NotImplementedException();
+        {
+            throw new NotImplementedException();
+        }
     }
-}
 }
